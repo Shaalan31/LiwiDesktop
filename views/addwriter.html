@@ -72,7 +72,7 @@
                 <div class="card-body">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <form class="form-horizontal" method="POST" action="" name="addwriter">
+                            <form id="addwriter"class="form-horizontal" method="POST" action="" name="addwriter">
                                 <div class="container">
                                     <div class="row col-xs-12 col-sm-12 col-lg-12 col-md-12">
 
@@ -131,7 +131,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-12">
-                                            <button type="submit" class="btn btn-lg btn-warning" style="float: right"  onclick="location.href = 'addpaper.html';">
+                                            <button type="submit" class="btn btn-lg btn-warning" style="float: right"  onclick="addWriter()">
                                                 Create
                                             </button>
                                         </div>
@@ -154,6 +154,18 @@
 <script>
     window.$ = window.jQuery = require('jquery');
     require('bootstrap');
+
+
+
+    function addWriter(){
+
+        var writer={"name":"binchen"};
+        var form = document.getElementById('addwriter')
+
+        alert(form);
+        
+        location.href = 'addpaper.html';
+    }
 </script>
 <!-- footer -->
 <script src="./layouts/footer.js"></script>
