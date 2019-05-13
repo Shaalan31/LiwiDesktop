@@ -1,5 +1,10 @@
 var localhost = "localhost:5000";
 
+window.onload = function () {
+    getAllWriters();
+};
+
+
 function predict() {
     uploadImage();
 }
@@ -36,7 +41,6 @@ function getPredictions(fileName) {
 
     var isArabic = document.getElementById("language").checked;
     var lang = isArabic ? "ar" : "en";
-
     var data = {
         _filename: fileName,
         writers_ids: ids
@@ -52,6 +56,28 @@ function getPredictions(fileName) {
         dataType: 'json',
         success: function (response) {
             alert("Success");
+        }
+    });
+}
+
+function getAllWriters() {
+    var url = "http://" + localhost + "/writers";
+
+    var selectElement = document.getElementById('writersList');
+
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: url,
+        success: function (response) {
+            for (var i = 0; i < response.data.length; i++) {
+                writer = response.data[i];
+
+                var opt = document.createElement('option');
+                opt.id = writer._id;
+                opt.innerHTML = writer._name + "<span>" + "  -" + writer._username + "</span>";
+                selectElement.appendChild(opt);
+            }
         }
     });
 }
