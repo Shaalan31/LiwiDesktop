@@ -130,10 +130,14 @@
                                         <div class="form-row col-xs-12 col-sm-12 col-lg-12 col-md-12">
                                             <div class="form-group col-md-6">
                                                 <label for="userimage">Photo</label>
-                                                <input type="file" class="form-control-file"
-                                                       id="userimage" required>
+                                                <input type="file" class="form-control-file" id="userimage" required onchange="readURL(this);">
                                             </div>
                                         </div>
+
+                                        <div class="col-xs-12 col-sm-12 col-lg-12 col-md-12">
+                                            <img class="offset-3" id="attachedimage" src="#" alt="your image" hidden>
+                                        </div>
+
                                         <div class="col-md-12">
                                             <button type="submit" class="btn btn-lg btn-warning" style="float: right"  onclick="location.href = 'addpaper.html';">
                                                 Create
@@ -161,5 +165,7 @@
 </script>
 <!-- footer -->
 <script src="./layouts/footer.js"></script>
+<script src="../public/js/script-fns.js"></script>
+
 </body>
 </html>

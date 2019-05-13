@@ -79,8 +79,7 @@
                                         <div class="form-row col-xs-12 col-sm-12 col-lg-12 col-md-12">
                                             <div class="form-group col-md-10">
                                                 <label for="trainingpaper">Training Paper</label>
-                                                <input type="file" class="form-control-file"
-                                                       id="trainingpaper" required>
+                                                <input type="file" class="form-control-file" id="trainingpaper" required onchange="readURL(this);">
                                                 <small class="text-muted"
                                                        style="color: darkred !important; font-style: italic;">
 
@@ -89,6 +88,11 @@
                                                     Language!
                                                 </small>
                                             </div>
+
+                                            <div class="col-xs-12 col-sm-12 col-lg-12 col-md-12">
+                                                <img class="offset-3" id="attachedimage" src="#" alt="your image" hidden>
+                                            </div>
+
                                             <div class="col-2 custom-control custom-switch" style="float: right;">
                                                 <input type="checkbox" class="custom-control-input" id="language"
                                                        style="float: right;">
@@ -98,8 +102,8 @@
                                                         Default is English.
                                                     </small>
                                                 </label>
-
                                             </div>
+
                                         </div>
                                         <div class="col-md-12">
                                             <button type="submit" class="btn btn-lg btn-warning" style="float: right">
@@ -131,5 +135,6 @@
 </script>
 <!-- footer -->
 <script src="./layouts/footer.js"></script>
+<script src="../public/js/script-fns.js"></script>
 </body>
 </html>
