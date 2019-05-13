@@ -54,3 +54,35 @@ function deleteWriter(writer_name, e){
     }
 
 }
+
+/**
+ * filter dropdown list
+ */
+function filterFunction(update) {
+    var input, filter, writers, i,firstTime;
+    input = document.getElementById("search");
+    filter = input.value.toUpperCase();
+    div = document.getElementById("dropdown");
+    writers = div.getElementsByTagName("option");
+    firstTime=true;
+    for (i = 0; i < writers.length; i++) {
+        txtValue = writers[i].textContent || writers[i].innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            writers[i].style.display = "";
+
+            // if found first time when update writer we select it
+            if(firstTime && update) {
+                writers[i].selected = 'selected';
+                firstTime = false;
+            }
+        } else {
+            writers[i].style.display = "none";
+        }
+    }
+
+    // if nothing found when update writer we select top one "empty"
+    if(firstTime && update)
+    {
+        writers[0].selected = 'selected';
+    }
+}
