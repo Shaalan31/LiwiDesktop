@@ -112,21 +112,26 @@
                                         <!-- attach writer's paper -->
                                         <div class="form-group col-xs-12 col-sm-12 col-lg-12 col-md-12">
                                             <label for="exampleFormControlFile1">Enter Writer's Paper</label>
-                                            <input type="file" class="form-control-file" id="AttachedFile"
-                                                   name="AttachedFile">
+                                            <input type="file" class="form-control-file" id="AttachedFile" name="AttachedFile" onchange="readURL(this);">
                                             <small class="text-muted"
                                                    style="color: darkred !important; font-style: italic;">
                                                 <i class="fas fa-exclamation-triangle"></i>
                                                 Please Remember to Choose the Right Language From the Top!
                                             </small>
                                         </div>
+                                        <div class="col-xs-12 col-sm-12 col-lg-12 col-md-12">
+                                            <img class="offset-3" id="attachedimage" src="#" alt="your image" hidden>
+                                        </div>
+
                                         <br>
-                                        <button type="submit" class="btn btn-warning btn-lg" style="float: right">Identify</button>
                                     </div>
                                 </div>
                             </form>
-                            <button type="submit" class="btn btn-warning btn-lg" onclick="predict();" style="float: right">Identify
-                            </button>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-lg-12 col-md-12">
+                                    <button type="submit" class="btn btn-warning btn-lg" onclick="predict();" style="float: right">Identify</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -86,3 +86,21 @@ function filterFunction(update) {
         writers[0].selected = 'selected';
     }
 }
+
+function readURL(input) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#attachedimage')
+                .attr('src', e.target.result)
+                .width(350)
+                .height(400)
+                .removeAttr("hidden");
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+
+}

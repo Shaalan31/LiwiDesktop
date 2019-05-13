@@ -108,12 +108,15 @@
                                         <!-- attach writer's paper -->
                                         <div class="form-group col-xs-12 col-sm-12 col-lg-12 col-md-12">
                                             <label for="exampleFormControlFile1">Enter Writer's Paper</label>
-                                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                                            <input type="file" class="form-control-file" id="exampleFormControlFile1" onchange="readURL(this);">
                                             <small class="text-muted" style="color: darkred !important; font-style: italic;">
                                                 <i class="fas fa-exclamation-triangle"></i>
                                                 Please Remember to Choose the Right Paper For the Writer & the Right
                                                 Language!
                                             </small>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-lg-12 col-md-12">
+                                            <img class="offset-3" id="attachedimage" src="#" alt="your image" hidden>
                                         </div>
                                     </div>
                                 </div>
