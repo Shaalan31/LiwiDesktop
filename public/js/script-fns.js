@@ -20,7 +20,7 @@ function chooseWriter(){
                 '<div class="input-group mb-3">' +
                 '<input style="background-color: rgba(255, 255, 255, 0.3)" type="text" name="chosenwriters[]" class="form-control" readonly="readonly" value="'+ writer_name +'" id="room' + writer_name.trim().toLowerCase() +'">' +
                 '<div class="input-group-append">' +
-                '<button class="btn btn-outline-danger" type="button" onclick="deleteWriter(&#39;' + writer_name + '&#39;, this);"><i class="fas fa-trash"></i></button>' +
+                '<button class="btn btn-outline-danger" type="button" onclick="deleteWriter(&#39;' + writer_name + '&#39;, this);"><i class="fas fa-user-minus"></i></button>' +
                 '</div>' +
                 '</div>';
 
@@ -33,7 +33,7 @@ function chooseWriter(){
             '<div class="input-group mb-3">' +
             '<input style="background-color: rgba(255, 255, 255, 0.3)" type="text" name="chosenwriters[]" class="form-control" readonly="readonly" value="'+ writer_name +'" id="room' + writer_name.trim().toLowerCase() +'">' +
             '<div class="input-group-append">' +
-            '<button class="btn btn-outline-danger" type="button" onclick="deleteWriter(&#39;' + writer_name + '&#39;, this);"><i class="fas fa-trash"></i></button>' +
+            '<button class="btn btn-outline-danger" type="button" onclick="deleteWriter(&#39;' + writer_name + '&#39;, this);"><i class="fas fa-user-minus"></i></button>' +
             '</div>' +
             '</div>';
     }
