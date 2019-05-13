@@ -16,7 +16,7 @@ function createWindow () {
     webPreferences: {
       nodeIntegration: true
     },
-    icon: path.join(__dirname, 'public/img/logo.png')
+    icon: path.join(__dirname, 'public/img/icon.png')
   })
 
   mainWindow.maximize()
