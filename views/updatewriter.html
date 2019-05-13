@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LIWI - Identify Writer</title>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>LIWI< - Identify a Writer</title>
+
+    <link href="../public/css/blocks.css" rel="stylesheet">
+
+    <!-- Bootstrap core CSS -->
+    <link href="../public/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+
+</head>
+<body class="background">
+
+<!-- header -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        <img src="../public/img/logo_transparent.png" width="100" height="50" class="d-inline-block align-top" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="../index.html">Home</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Add Writer</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Identify Writer</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<h1 class="text-center display-3">Update Writer</h1>
+<blockquote class="blockquote text-center">
+    <p class="mb-0">Attach your <cite title="Source Title">Writer's Training Paper</cite>. Choose it wisely!</p>
+</blockquote>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12">
+            <div class="alert alert-success" role="alert" hidden>
+                Training paper uploaded successfully.
+            </div>
+            <!-- Card Form -->
+            <div class="card border-warning mb-3" style="background-color: rgba(255, 255, 255, 0.82)">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6 col-lg-6 col-xs-6">Update Writer</div>
+                        <div class="form-group custom-control custom-switch col-sm-6 col-md-6 col-lg-6 col-xs-6">
+                            <input type="checkbox" class="custom-control-input" id="language">
+                            <label class="custom-control-label" for="language">Toggle this for arabic</label>
+                            <small id="passwordHelpInline" class="text-muted">
+                                Default is English.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <form class="form-horizontal" method="POST" action="" name="identifywriter">
+                                <div class="container">
+                                    <div class="row col-xs-12 col-sm-12 col-lg-12 col-md-12">
+
+                                        <!-- switch to choose between arabic and english -->
+                                        <div class="form-row align-items-center col-xs-12 col-sm-12 col-lg-12 col-md-12">
+                                            <div class="input-group col-md-6 form-group">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">Search</div>
+                                                </div>
+                                                <input type="text" class="form-control" id="search" placeholder="Search for writer.." onkeyup="filterFunction(true)">
+                                            </div>
+                                        </div>
+
+                                        <!-- select writer -->
+                                        <div id="dropdown" class="form-group col-xs-12 col-sm-12 col-lg-12 col-md-12">
+                                            <select class="form-control" id="writersList" style="background-color: rgba(255, 255, 255, 0.82)">
+                                                <option id="0"></option>
+                                                <option id="1">Omar Ali <span>-oshaalan3</span></option>
+                                                <option id="2">Ahmed Khairy <span>-akhairy1</span></option>
+                                                <option id="3">May Ahmed <span>-mayahmed2</span></option>
+                                                <option id="4">Samar Gamal <span>-sgamal1</span></option>
+                                                <option id="5">Salma Ibrahim <span>sibrahim2</span></option>
+                                            </select>
+                                        </div>
+
+                                        <!-- list of writers -->
+                                        <div class="form-group col-xs-12 col-sm-12 col-lg-12 col-md-12" id="writers"></div>
+
+                                        <!-- attach writer's paper -->
+                                        <div class="form-group col-xs-12 col-sm-12 col-lg-12 col-md-12">
+                                            <label for="exampleFormControlFile1">Enter Writer's Paper</label>
+                                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                                            <small class="text-muted" style="color: darkred !important; font-style: italic;">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                                Please Remember to Choose the Right Paper For the Writer & the Right
+                                                Language!
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-warning btn-lg" style="float: right">Add</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- footer -->
+<div id="footer"></div>
+
+<!-- Scripts -->
+<script>
+    window.$ = window.jQuery = require('jquery');
+    require('bootstrap');
+</script>
+<!-- footer -->
+<script src="./layouts/footer.js"></script>
+<script src="../public/js/script-fns.js"></script>
+</body>
+</html>
