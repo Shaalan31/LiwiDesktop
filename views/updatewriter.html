@@ -45,9 +45,9 @@
     </div>
 </nav>
 
-<h1 class="text-center display-3">Identify Writer</h1>
+<h1 class="text-center display-3">Update Writer</h1>
 <blockquote class="blockquote text-center">
-    <p class="mb-0">Choose writers to identify between them and attach your <cite title="Source Title">Writer's Paper</cite>.</p>
+    <p class="mb-0">Attach your <cite title="Source Title">Writer's Training Paper</cite>. Choose it wisely!</p>
 </blockquote>
 
 <div class="container">
@@ -60,7 +60,7 @@
             <div class="card border-warning mb-3" style="background-color: rgba(255, 255, 255, 0.82)">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-sm-6 col-md-6 col-lg-6 col-xs-6">Identify Writer</div>
+                        <div class="col-sm-6 col-md-6 col-lg-6 col-xs-6">Update Writer</div>
                         <div class="form-group custom-control custom-switch col-sm-6 col-md-6 col-lg-6 col-xs-6">
                             <input type="checkbox" class="custom-control-input" id="language">
                             <label class="custom-control-label" for="language">Toggle this for arabic</label>
@@ -83,18 +83,19 @@
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text">Search</div>
                                                 </div>
-                                                <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Search for writer..">
+                                                <input type="text" class="form-control" id="search" placeholder="Search for writer.." onkeyup="filterFunction(true)">
                                             </div>
                                         </div>
 
                                         <!-- select writer -->
-                                        <div class="form-group col-xs-12 col-sm-12 col-lg-12 col-md-12">
+                                        <div id="dropdown" class="form-group col-xs-12 col-sm-12 col-lg-12 col-md-12">
                                             <select class="form-control" id="writersList" style="background-color: rgba(255, 255, 255, 0.82)">
+                                                <option id="0"></option>
                                                 <option id="1">Omar Ali <span>-oshaalan3</span></option>
                                                 <option id="2">Ahmed Khairy <span>-akhairy1</span></option>
                                                 <option id="3">May Ahmed <span>-mayahmed2</span></option>
                                                 <option id="4">Samar Gamal <span>-sgamal1</span></option>
-                                                <option hidden id="5">Salma Ibrahim <span>sibrahim2</span></option>
+                                                <option id="5">Salma Ibrahim <span>sibrahim2</span></option>
                                             </select>
                                         </div>
 
