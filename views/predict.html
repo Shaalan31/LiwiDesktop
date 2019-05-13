@@ -8,7 +8,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>LIWI</title>
+    <title>LIWI< - Identify a Writer</title>
+
+    <link href="../public/css/blocks.css" rel="stylesheet">
 
     <!-- Bootstrap core CSS -->
     <link href="../public/css/bootstrap.min.css" rel="stylesheet">
@@ -16,9 +18,8 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body>
+<body class="background">
 
-    <!-- header -->
     <!-- header -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">
@@ -43,6 +44,44 @@
     </nav>
 
 
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12">
+
+                <!-- Card Form -->
+                <div class="card border-warning mb-3" style="background-color: rgba(255, 255, 255, 0.82)">
+                    <div class="card-header">Identify Writer</div>
+                    <div class="card-body">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <form class="form-horizontal" method="POST" action="">
+                                    <div class="container">
+                                        <div class="row col-xs-12 col-sm-12 col-lg-12 col-md-12">
+                                            <div class="form-group col-xs-12 col-sm-12 col-lg-12 col-md-12">
+                                                <label for="exampleFormControlSelect2">Select Writers to Compare Between</label>
+                                                <select multiple class="form-control" id="exampleFormControlSelect2">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="exampleFormControlFile1">Example file input</label>
+                                                <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <!-- footer -->
