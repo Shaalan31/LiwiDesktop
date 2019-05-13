@@ -1,5 +1,5 @@
 var localhost = "localhost:5000";
-
+var predictions = [];
 window.onload = function () {
     getAllWriters();
 };
@@ -56,6 +56,7 @@ function getPredictions(fileName) {
         dataType: 'json',
         success: function (response) {
             alert("Success");
+            predictions=response.data;
         }
     });
 }
