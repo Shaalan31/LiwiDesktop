@@ -1,6 +1,7 @@
-var localhost = "localhost:5000";
+var localhost = "127.0.0.1:5000";
 
 function addWriter() {
+    
     // Stop form from submitting normally
     // event.preventDefault();
 
@@ -8,6 +9,13 @@ function addWriter() {
     file = document.getElementById("userimage").files[0];
     url = "http://" + localhost + "/image/testing";
 
+    fullName = $.trim($('form').find('input[name="fullname"]').val()),
+    username = $.trim($('form').find('input[name="username"]').val()),
+    phone = $.trim($('form').find('input[name="phone"]').val()),
+    address = $.trim($('form').find('input[name="address"]').val()),
+    birthday = $.trim($('form').find('input[name="birthday"]').val()),
+    nid = $.trim($('form').find('input[name="nid"]').val())
+            
     var formData = new FormData();
     formData.append('image', file);
 
@@ -19,6 +27,16 @@ function addWriter() {
         data: formData,
         success: function (response) {
             var fileName = response.data;
+            
+            var userdata = {
+                nid: nid,
+                fullName: fullName,
+                username: username,
+                address: address,
+                birthday: birthday,
+                photo: fileName,
+                phoneNumber: phone,
+            };
             // response.data._filename
             // var testingRequestModel = {
             //   _filename:,
@@ -26,19 +44,15 @@ function addWriter() {
             // };
         },
         error: function (error) {
+            alert('fail')
             alert(error);
         }
     });
 };
-function ajaxAW() {
-    // //Used in Editing pharmacy
-    $('#editpharmacyform').on("submit", function (event) {
 
-        var deletedVal;
-        // Stop form from submitting normally
-        event.preventDefault();
-        var e = document.getElementsByName("status");
-        var statusval = e[0].options[e[0].selectedIndex].value;
+/*
+function ajaxAW() {
+
 
 
 
@@ -50,15 +64,7 @@ function ajaxAW() {
             address = $.trim($('form').find('input[name="address"]').val()),
             birthday = $.trim($('form').find('input[name="birthday"]').val()),
             nid = $.trim($('form').find('input[name="nid"]').val()),
-            //photo = $.trim($('form').find('input[name="userimage"]').val())
-            url = "https://" + localhost + "/api/v1/admin/editpharmacy";
-
-        var formtemp = $('#fileUploadForm')[0];
-        // Create an FormData object 
-        var datatemp = new FormData(formtemp);
-
-        var data = new FormData()
-        data.append('userimage', datatemp.get('userimage'))
+            
 
 
 
@@ -111,8 +117,5 @@ function ajaxAW() {
                 $("#btnSubmit").prop("disabled", false);
 
             }
-        });
-
-
-    });
-}
+        });    
+}*/
