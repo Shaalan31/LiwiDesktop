@@ -1,0 +1,24 @@
+{
+  "name": "LIWI",
+  "version": "1.0.0",
+  "description": "A minimal Electron application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/Shaalan31/LIWI",
+  "keywords": [
+    "Electron",
+    "LIWI"
+  ],
+  "author": "LIWI",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^5.0.0"
+  },
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.15.0"
+  }
+}
