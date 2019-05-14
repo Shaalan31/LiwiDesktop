@@ -50,7 +50,12 @@ function addWriter() {
                 data: JSON.stringify(userdata),
                 dataType: 'json',
                 success: function (response) {
-                    alert(JSON.stringify(response));
+                    id = response.data
+                    $.redirect("addpaper.html",
+                    {
+                        id: id,
+                    },
+                    "GET", "_blank");
                 },
                 error: function (error) {
                     //handle different errors
