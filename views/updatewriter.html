@@ -76,7 +76,7 @@
                 <div class="card-body">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <form class="form-horizontal" method="POST" action="" name="identifywriter">
+                            <form class="form-horizontal" method="POST" action="" name="identifywriter" id="identifywriter">
                                 <div class="container">
                                     <div class="row col-xs-12 col-sm-12 col-lg-12 col-md-12">
 
@@ -92,13 +92,8 @@
 
                                         <!-- select writer -->
                                         <div id="dropdown" class="form-group col-xs-12 col-sm-12 col-lg-12 col-md-12">
-                                            <select class="form-control" id="writersList" style="background-color: rgba(255, 255, 255, 0.82)">
+                                            <select class="form-control" name="writersList" id="writersList" style="background-color: rgba(255, 255, 255, 0.82)">
                                                 <option id="0"></option>
-                                                <option id="1">Omar Ali <span>-oshaalan3</span></option>
-                                                <option id="2">Ahmed Khairy <span>-akhairy1</span></option>
-                                                <option id="3">May Ahmed <span>-mayahmed2</span></option>
-                                                <option id="4">Samar Gamal <span>-sgamal1</span></option>
-                                                <option id="5">Salma Ibrahim <span>sibrahim2</span></option>
                                             </select>
                                         </div>
 
@@ -108,7 +103,7 @@
                                         <!-- attach writer's paper -->
                                         <div class="form-group col-xs-12 col-sm-12 col-lg-12 col-md-12">
                                             <label for="exampleFormControlFile1">Enter Writer's Paper</label>
-                                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                                            <input type="file" class="form-control-file" id="trainingpaper">
                                             <small class="text-muted" style="color: darkred !important; font-style: italic;">
                                                 <i class="fas fa-exclamation-triangle"></i>
                                                 Please Remember to Choose the Right Paper For the Writer & the Right
@@ -117,7 +112,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-warning btn-lg" style="float: right">Add</button>
+                                <button type="submit" class="btn btn-warning btn-lg" style="float: right" onclick="updateWriter()">Add</button>
                             </form>
                         </div>
                     </div>
@@ -135,9 +130,14 @@
 <script>
     window.$ = window.jQuery = require('jquery');
     require('bootstrap');
+
+    $(function() {
+        loadUsers();
+    });
 </script>
 <!-- footer -->
 <script src="./layouts/footer.js"></script>
 <script src="../public/js/script-fns.js"></script>
+<script src="../public/js/updatewriter.js"></script>
 </body>
 </html>
