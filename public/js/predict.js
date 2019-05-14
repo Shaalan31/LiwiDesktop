@@ -57,6 +57,11 @@ function getPredictions(fileName) {
         success: function (response) {
             alert("Success");
             predictions=response.data;
+            $.redirect("prediction.html",
+                    {
+                        predictions: predictions,
+                    },
+                    "GET");
         }
     });
 }
