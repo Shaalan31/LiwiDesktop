@@ -1,5 +1,9 @@
 var localhost = "127.0.0.1:5000";
 
+$("#addwriter").submit(function(e) {
+    e.preventDefault();
+});
+
 function addWriter() {
     
     // Stop form from submitting normally
