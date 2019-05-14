@@ -55,7 +55,7 @@ function addWriter() {
                     {
                         id: id,
                     },
-                    "GET", "_blank");
+                    "GET");
                 },
                 error: function (error) {
                     //handle different errors
