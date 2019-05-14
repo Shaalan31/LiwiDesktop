@@ -49,7 +49,8 @@ function addWriter() {
                     alert(JSON.stringify(response));
                 },
                 error: function (error) {
-
+                    //handle different errors
+                    alert(JSON.stringify(error));
                 }
             });
 
