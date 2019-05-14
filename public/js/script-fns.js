@@ -20,7 +20,7 @@ function chooseWriter(){
                 '<div class="input-group mb-3">' +
                 '<input style="background-color: rgba(255, 255, 255, 0.3)" type="text" name="chosenwriters[]" class="form-control" readonly="readonly" value="'+ writer_name +'" id="room' + writer_name.trim().toLowerCase() +'">' +
                 '<div class="input-group-append">' +
-                '<button class="btn btn-outline-danger" type="button" onclick="deleteWriter(&#39;' + writer_name + '&#39;, this);"><i class="fas fa-trash"></i></button>' +
+                '<button class="btn btn-outline-danger" type="button" onclick="deleteWriter(&#39;' + writer_name + '&#39;, this);"><i class="fas fa-user-minus"></i></button>' +
                 '</div>' +
                 '</div>';
 
@@ -33,7 +33,7 @@ function chooseWriter(){
             '<div class="input-group mb-3">' +
             '<input style="background-color: rgba(255, 255, 255, 0.3)" type="text" name="chosenwriters[]" class="form-control" readonly="readonly" value="'+ writer_name +'" id="room' + writer_name.trim().toLowerCase() +'">' +
             '<div class="input-group-append">' +
-            '<button class="btn btn-outline-danger" type="button" onclick="deleteWriter(&#39;' + writer_name + '&#39;, this);"><i class="fas fa-trash"></i></button>' +
+            '<button class="btn btn-outline-danger" type="button" onclick="deleteWriter(&#39;' + writer_name + '&#39;, this);"><i class="fas fa-user-minus"></i></button>' +
             '</div>' +
             '</div>';
     }
@@ -53,4 +53,36 @@ function deleteWriter(writer_name, e){
         }
     }
 
+}
+
+/**
+ * filter dropdown list
+ */
+function filterFunction(update) {
+    var input, filter, writers, i,firstTime;
+    input = document.getElementById("search");
+    filter = input.value.toUpperCase();
+    div = document.getElementById("dropdown");
+    writers = div.getElementsByTagName("option");
+    firstTime=true;
+    for (i = 0; i < writers.length; i++) {
+        txtValue = writers[i].textContent || writers[i].innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            writers[i].style.display = "";
+
+            // if found first time when update writer we select it
+            if(firstTime && update) {
+                writers[i].selected = 'selected';
+                firstTime = false;
+            }
+        } else {
+            writers[i].style.display = "none";
+        }
+    }
+
+    // if nothing found when update writer we select top one "empty"
+    if(firstTime && update)
+    {
+        writers[0].selected = 'selected';
+    }
 }
