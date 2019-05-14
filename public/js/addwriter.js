@@ -28,15 +28,31 @@ function addWriter() {
         success: function (response) {
             var fileName = response.data;
             
+            var url = "http://"+localhost+"/writer"; 
             var userdata = {
-                nid: nid,
-                fullName: fullName,
-                username: username,
-                address: address,
-                birthday: birthday,
-                photo: fileName,
-                phoneNumber: phone,
+                _nid: nid,
+                _name: fullName,
+                _username: username,
+                _address: address,
+                _birthday: birthday,
+                _image: fileName,
+                _phone: phone,
             };
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: url,
+                data: JSON.stringify(userdata),
+                dataType: 'json',
+                success: function (response) {
+                    alert(JSON.stringify(response));
+                },
+                error: function (error) {
+
+                }
+            });
+
             // response.data._filename
             // var testingRequestModel = {
             //   _filename:,
