@@ -11,7 +11,7 @@ function addWriter() {
 
     // Get some values from elements on the page:
     file = document.getElementById("userimage").files[0];
-    url = "http://" + localhost + "/image/testing";
+    url = "http://" + localhost + "/image/writers";
 
     fullName = $.trim($('form').find('input[name="fullname"]').val()),
     username = $.trim($('form').find('input[name="username"]').val()),
