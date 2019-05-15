@@ -6,7 +6,13 @@ function chooseWriter(){
     var found = false;
     var writer_id = document.forms['identifywriter']['writersList'][document.getElementById("writersList").selectedIndex].id;
     var writer_name = document.forms['identifywriter']['writersList'].value;
-    var writers = document.getElementById('writers')
+    var writers = document.getElementById('writers');
+
+    // remove the alert for no chosen writers
+    const writersList = document.getElementById('writersList');
+    writersList.setCustomValidity("");
+    writersList.reportValidity();
+
 
     if(chosenwriters.length != 0) {
         for(var i = 0; i < chosenwriters.length; i++){
@@ -87,7 +93,16 @@ function filterFunction(update) {
     }
 }
 
+/**
+ * Show the attached image
+ * @param input: input file DOM element
+ */
 function readURL(input) {
+
+    // remove the validation alert
+    const file = document.getElementById("AttachedFile");
+    file.setCustomValidity("");
+    file.reportValidity();
 
     if (input.files && input.files[0]) {
         var reader = new FileReader();

@@ -4,13 +4,29 @@ window.onload = function () {
     getAllWriters();
 };
 
-
+/**
+ * Function called to predict the writer
+ */
 function predict() {
     uploadImage();
 }
 
-
+/**
+ * Function to send upload image request and save testing image in the server
+ */
 function uploadImage() {
+    // Validate prediction input
+    if(!validatePrediction())
+        return
+    else {
+        const predictButton = document.getElementById("predictButton");
+
+        predictButton.disabled = true;
+        predictButton.innerText = "";
+        predictButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>\n' +
+            '  Loading...';
+    }
+
     // Get some values from elements on the page:
     file = document.getElementById("AttachedFile").files[0];
     url = "http://" + localhost + "/image/testing";
@@ -28,11 +44,22 @@ function uploadImage() {
             getPredictions(response.data);
         },
         error: function (error) {
-            alert(error);
+            const file = document.getElementById("AttachedFile");
+            const predictButton = document.getElementById("predictButton");
+
+            predictButton.disabled = false;
+            predictButton.innerHTML = "Identify &raquo;";
+
+            file.setCustomValidity("Error in uploading image. Please try again!");
+            file.reportValidity();
         }
     });
 }
 
+/**
+ * Function to send prediction request and get the prediction response
+ * @param fileName
+ */
 function getPredictions(fileName) {
     var ids = [];
     for (var i = 0; i < chosenwriters.length; i++) {
@@ -61,6 +88,9 @@ function getPredictions(fileName) {
     });
 }
 
+/**
+ * Get all writers to choose between them
+ */
 function getAllWriters() {
     var url = "http://" + localhost + "/writers";
 
@@ -82,6 +112,37 @@ function getAllWriters() {
         }
     });
 }
+
+/**
+ * Function to validate the inputs of prediction "predict.html"
+ * @returns {boolean}
+ */
+function validatePrediction() {
+    const writers = document.getElementById('writersList');
+    const file = document.getElementById("AttachedFile");
+
+    if(chosenwriters.length == 0){
+        writers.setCustomValidity("Please choose writers to identify between them!");
+        writers.reportValidity();
+        return false;
+    } else {
+        writers.setCustomValidity("");
+        writers.reportValidity();
+    }
+
+    if(file.files.length == 0){
+        file.setCustomValidity("Please attach the paper!");
+        file.reportValidity();
+        return false;
+    } else {
+        file.setCustomValidity("");
+        file.reportValidity();
+    }
+
+
+    return true
+}
+
 
 
 
