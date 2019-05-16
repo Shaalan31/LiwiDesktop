@@ -16,11 +16,11 @@ function predict() {
  */
 function uploadImage() {
     // Validate prediction input
+    const predictButton = document.getElementById("predictButton");
+
     if(!validatePrediction())
         return
     else {
-        const predictButton = document.getElementById("predictButton");
-
         predictButton.disabled = true;
         predictButton.innerText = "";
         predictButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>\n' +
@@ -45,7 +45,6 @@ function uploadImage() {
         },
         error: function (error) {
             const file = document.getElementById("AttachedFile");
-            const predictButton = document.getElementById("predictButton");
 
             predictButton.disabled = false;
             predictButton.innerHTML = "Identify &raquo;";
