@@ -6,7 +6,7 @@ $("#identifywriter").submit(function(e) {
 
 function loadUsers(){
     div = document.getElementById("writersList");
-    url = 'http://'+localhost+'/writers'
+    url = 'http://'+localhost+'/allWriters'
     $.ajax({
         type: "GET",
         contentType: "application/json",
