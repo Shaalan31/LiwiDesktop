@@ -5,7 +5,9 @@ $("#identifywriter").submit(function(e) {
 });
 
 function loadUsers(){
-    div = document.getElementById("writersList");
+    const noWritersAlert = document.getElementById("noWritersAlert");
+    const generalErrorAlert = document.getElementById("generalErrorAlert");
+
     url = 'http://'+localhost+'/allWriters'
     $.ajax({
         type: "GET",
@@ -13,8 +15,7 @@ function loadUsers(){
         url: url,
         success: function (response) {
 
-            console.log(response.data)
-            var list = {}
+            var list = {};
             for(let i = 0; i < response.data.length; i++){
                 
                 list[response.data[i]['_id']] = response.data[i]['_name']+' - '+response.data[i]['_username'];
@@ -27,22 +28,37 @@ function loadUsers(){
            });
         },
         error: function (error) {
-            //handle different errors
-            alert(JSON.stringify(error));
+            if(error.status == 404)
+                noWritersAlert.removeAttribute("hidden");
+            else
+                generalErrorAlert.removeAttribute("hidden");
         }
     });
 
 }
 
 function updateWriter(){
+    // validation and add loading button
+    const updateButton = document.getElementById("updateButton");
+    const errorAlert = document.getElementById("errorAlert");
+    const notFoundAlert = document.getElementById("notFoundAlert");
+
+
+    if(!validateUpdateWriter())
+        return;
+    else {
+        updateButton.disabled = true;
+        updateButton.innerText = "";
+        updateButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>\n' +
+            '  Loading...';
+
+    }
+
     file = document.getElementById("trainingpaper").files[0];
     url = "http://" + localhost + "/image/training";
 
     var e = document.getElementById("writersList");
     var writerId = e.options[e.selectedIndex].value
-
-    //writerId = $.trim($('form').find('input[name="writersList"]').val());
-    
     
     var formData = new FormData();
     formData.append('image', file);
@@ -77,6 +93,12 @@ function updateWriter(){
                 data: JSON.stringify(userdata),
                 dataType: 'json',
                 success: function (response) {
+                    errorAlert.setAttribute("hidden", "hidden");
+                    notFoundAlert.setAttribute("hidden", "hidden");
+
+                    updateButton.disabled = false;
+                    updateButton.innerHTML = "Add &raquo;";
+
                     const Swal = require('sweetalert2');
                     Swal.fire(
                         'Training Done',
@@ -85,22 +107,61 @@ function updateWriter(){
                       )
                 },
                 error: function (error) {
-                    //handle different errors
-                    alert(JSON.stringify(error));
+                    updateButton.disabled = false;
+                    updateButton.innerHTML = "Add &raquo;";
+
+                    if(error.status == 404){
+                        errorAlert.setAttribute("hidden", "hidden");
+                        notFoundAlert.removeAttribute("hidden");
+                    }
+                    else{
+                        notFoundAlert.setAttribute("hidden", "hidden");
+                        errorAlert.removeAttribute("hidden");
+                    }
                 }
             });
-
-            // response.data._filename
-            // var testingRequestModel = {
-            //   _filename:,
-            //    writers_ids:
-            // };
         },
         error: function (error) {
-            alert('fail')
-            alert(error);
+            const trainingPaper = document.getElementById("trainingpaper");
+
+            updateButton.disabled = false;
+            updateButton.innerHTML = "Add Paper &raquo;";
+
+            trainingPaper.setCustomValidity("Error in uploading writer's sample paper. Please try again!");
+            trainingPaper.reportValidity();
         }
     });
+}
+
+/**
+ * Function to validate update writer's inputs
+ * @returns {boolean}
+ */
+function validateUpdateWriter() {
+    const writersList = document.getElementById("writersList");
+    const trainingPaper = document.getElementById("trainingpaper");
 
 
+    // check dropdown menu
+    if(writersList.options[writersList.selectedIndex].value == 0){
+        writersList.setCustomValidity("Please choose writer.");
+        writersList.reportValidity();
+        return false;
+
+    } else {
+        writersList.setCustomValidity("");
+        writersList.reportValidity();
+    }
+
+    if(trainingPaper.files.length == 0){
+        trainingPaper.setCustomValidity("Please add a sample paper for the writer!");
+        trainingPaper.reportValidity();
+        return false;
+
+    } else {
+        trainingPaper.setCustomValidity("");
+        trainingPaper.reportValidity();
+    }
+
+    return true;
 }
