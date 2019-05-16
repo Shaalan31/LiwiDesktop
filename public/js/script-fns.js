@@ -100,9 +100,9 @@ function filterFunction(update) {
 function readURL(input) {
 
     // remove the validation alert
-    const file = document.getElementById("AttachedFile");
-    file.setCustomValidity("");
-    file.reportValidity();
+    // const file = document.getElementById("AttachedFile");
+    input.setCustomValidity("");
+    input.reportValidity();
 
     if (input.files && input.files[0]) {
         var reader = new FileReader();

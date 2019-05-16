@@ -73,7 +73,7 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <br/>
-                            <form class="form-horizontal" method="POST" action="" name="addwriter">
+                            <form id="addPaperForm" class="form-horizontal" method="POST" action="" name="addwriter">
                                 <div class="container">
                                     <div class="row col-xs-12 col-sm-12 col-lg-12 col-md-12">
                                         <div class="form-row col-xs-12 col-sm-12 col-lg-12 col-md-12">
@@ -95,7 +95,7 @@
 
                                             <div class="col-2 custom-control custom-switch" style="float: right;">
                                                 <input type="checkbox" class="custom-control-input" id="language"
-                                                       style="float: right;">
+                                                       style="float: right;" name="checkboxLanguage">
                                                 <label class="custom-control-label" for="language"
                                                        style="float: right;">Toggle this for arabic paper
                                                     <small id="passwordHelpInline" class="text-muted">
@@ -106,7 +106,7 @@
 
                                         </div>
                                         <div class="col-md-12">
-                                            <button type="submit" class="btn btn-lg btn-warning" style="float: right">
+                                            <button type="submit" class="btn btn-lg btn-warning" style="float: right" onclick="addPaper()">
                                                 Add
                                             </button>
                                         </div>
@@ -135,6 +135,7 @@
 </script>
 <!-- footer -->
 <script src="./layouts/footer.js"></script>
+<script src="../public/js/addpaper.js"></script>
 <script src="../public/js/script-fns.js"></script>
 </body>
 </html>
