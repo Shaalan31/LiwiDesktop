@@ -24,13 +24,27 @@ var getParams = function (url) {
 	return params;
 };
 
-
+/**
+ * Function to send request to add training paper
+ */
 function addPaper(){
+    const addButton = document.getElementById("addButton");
+    const errorAlert = document.getElementById("errorAlert");
+
+    if(!validateAddPaper())
+        return;
+    else {
+        addButton.disabled = true;
+        addButton.innerText = "";
+        addButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>\n' +
+            '  Loading...';
+    }
+
     file = document.getElementById("trainingpaper").files[0];
     url = "http://" + localhost + "/image/training";
 
 
-    writerId = getParams(window.location.href).id
+    writerId = getParams(window.location.href).id;
     language = $.trim($('form').find('input[name="trainingpaper"]').val());
 
     
@@ -67,6 +81,10 @@ function addPaper(){
                 data: JSON.stringify(userdata),
                 dataType: 'json',
                 success: function (response) {
+                    errorAlert.setAttribute("hidden", "hidden");
+                    addButton.disabled = false;
+                    addButton.innerHTML = "Add &raquo;";
+
                     const Swal = require('sweetalert2');
                     Swal.fire(
                         'Training Done',
@@ -75,22 +93,39 @@ function addPaper(){
                       )
                 },
                 error: function (error) {
-                    //handle different errors
-                    alert(JSON.stringify(error));
+                    addButton.disabled = false;
+                    addButton.innerHTML = "Add &raquo;";
+
+                    errorAlert.removeAttribute("hidden");
                 }
             });
-
-            // response.data._filename
-            // var testingRequestModel = {
-            //   _filename:,
-            //    writers_ids:
-            // };
         },
         error: function (error) {
-            alert('fail')
-            alert(error);
+            const trainingPaper = document.getElementById("trainingpaper");
+
+            addButton.disabled = false;
+            addButton.innerHTML = "Add &raquo;";
+
+            trainingPaper.setCustomValidity("Error in uploading writer's sample paper. Please try again!");
+            trainingPaper.reportValidity();
         }
     });
+}
 
+/**
+ * Function to validate add paper inputs
+ * @returns {boolean}
+ */
+function validateAddPaper() {
+    const trainingPaper = document.getElementById("trainingpaper");
 
+    if(trainingPaper.files.length == 0){
+        trainingPaper.setCustomValidity("Please add a sample paper for the writer!");
+        trainingPaper.reportValidity();
+        return false;
+    } else {
+        trainingPaper.setCustomValidity("");
+        trainingPaper.reportValidity();
+    }
+    return true;
 }

@@ -9,6 +9,7 @@ $("#addwriter").submit(function(e) {
  */
 function addWriter() {
 
+    // Validate and add loading button
     const createButton = document.getElementById("createButton");
 
     if(!validateAddWriter())
@@ -95,7 +96,7 @@ function addWriter() {
             const userImage = document.getElementById("userimage");
 
             createButton.disabled = false;
-            createButton.innerHTML = "Identify &raquo;";
+            createButton.innerHTML = "Create &raquo;";
 
             userImage.setCustomValidity("Error in uploading writer's image. Please try again!");
             userImage.reportValidity();

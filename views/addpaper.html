@@ -63,7 +63,12 @@
                 <div class="alert alert-success" role="alert" hidden>
                     Training paper uploaded successfully.
                 </div>
-                <br/>
+
+                <!-- alert in case of error in server -->
+                <div class="alert alert-danger" role="alert" hidden="hidden"  id="errorAlert">
+                    Error occurred! Please try again later.
+                    <em> Make sure to choose <strong>the right language</strong>!</em>
+                </div>
 
                 <!-- Card Form -->
                 <div class="card border-warning mb-3" style="background-color: rgba(255, 255, 255, 0.82)">
@@ -105,8 +110,9 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
-                                                <button type="submit" class="btn btn-lg btn-warning" style="float: right" onclick="addPaper()">
-                                                    Add
+                                                <br>
+                                                <button id="addButton" type="submit" class="btn btn-lg btn-warning" style="float: right" onclick="addPaper()">
+                                                    Add &raquo;
                                                 </button>
                                             </div>
                                         </div>
