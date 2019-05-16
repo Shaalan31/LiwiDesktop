@@ -1,6 +1,3 @@
-const Swal = require('sweetalert2')
-
-
 var localhost = "127.0.0.1:5000";
 
 $("#identifywriter").submit(function(e) {
@@ -80,6 +77,7 @@ function updateWriter(){
                 data: JSON.stringify(userdata),
                 dataType: 'json',
                 success: function (response) {
+                    const Swal = require('sweetalert2');
                     Swal.fire(
                         'Training Done',
                         '',
