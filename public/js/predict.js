@@ -19,7 +19,7 @@ function uploadImage() {
     const predictButton = document.getElementById("predictButton");
 
     if(!validatePrediction())
-        return
+        return;
     else {
         predictButton.disabled = true;
         predictButton.innerText = "";
@@ -60,6 +60,11 @@ function uploadImage() {
  * @param fileName
  */
 function getPredictions(fileName) {
+    const predictButton = document.getElementById("predictButton");
+    const errorAlert = document.getElementById("errorAlert");
+    const writers = document.getElementById('writersList');
+
+
     var ids = [];
     for (var i = 0; i < chosenwriters.length; i++) {
         ids.push(parseInt(chosenwriters[i].id));
@@ -81,13 +86,33 @@ function getPredictions(fileName) {
         data: JSON.stringify(data),
         dataType: 'json',
         success: function (response) {
-            alert("Success");
+            predictButton.disabled = false;
+            predictButton.innerHTML = "Add &raquo;";
+
+            writers.setCustomValidity("");
+            writers.reportValidity();
+
+            errorAlert.setAttribute("hidden", "hidden");
+
             predictions=response.data;
             $.redirect("prediction.html",
                     {
                         predictions: predictions,
                     },
                     "GET");
+        },
+        error: function (error) {
+
+            predictButton.disabled = false;
+            predictButton.innerHTML = "Add &raquo;";
+
+            if(error.status == 400){
+                writers.setCustomValidity("You have exceeded the number of chosen writers.");
+                writers.reportValidity();
+
+            } else {
+                errorAlert.removeAttribute("hidden");
+            }
         }
     });
 }
@@ -99,6 +124,8 @@ function getAllWriters() {
     var url = "http://" + localhost + "/writers";
 
     var selectElement = document.getElementById('writersList');
+    const noWritersAlert = document.getElementById("noWritersAlert");
+    const generalErrorAlert = document.getElementById("generalErrorAlert");
 
     $.ajax({
         type: "GET",
@@ -113,6 +140,12 @@ function getAllWriters() {
                 opt.innerHTML = writer._name + "<span>" + "  -" + writer._username + "</span>";
                 selectElement.appendChild(opt);
             }
+        },
+        error: function (error) {
+            if(error.status == 404)
+                noWritersAlert.removeAttribute("hidden");
+            else
+                generalErrorAlert.removeAttribute("hidden");
         }
     });
 }
@@ -144,7 +177,7 @@ function validatePrediction() {
     }
 
 
-    return true
+    return true;
 }
 
 

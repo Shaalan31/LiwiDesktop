@@ -4,6 +4,9 @@ $("#identifywriter").submit(function(e) {
     e.preventDefault();
 });
 
+/**
+ * load all writers in the system in the dropdown list
+ */
 function loadUsers(){
     const noWritersAlert = document.getElementById("noWritersAlert");
     const generalErrorAlert = document.getElementById("generalErrorAlert");
@@ -37,6 +40,9 @@ function loadUsers(){
 
 }
 
+/**
+ * Function to send update writer with a new sample paper request
+ */
 function updateWriter(){
     // validation and add loading button
     const updateButton = document.getElementById("updateButton");
