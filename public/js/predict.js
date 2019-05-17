@@ -1,7 +1,20 @@
 var localhost = "localhost:5000";
 var predictions = [];
 window.onload = function () {
-    getAllWriters();
+    // get language
+    var hrefParams = new URL(location.href);
+    const lang = hrefParams.searchParams.get("lang");
+    var showLang;
+
+    // Show the language in the message
+    if(lang == 'ar')
+        showLang = "Arabic";
+    else
+        showLang = "English";
+    document.getElementById("rememberMessage").innerHTML = document.getElementById("rememberMessage").innerHTML
+                                                                    + "Please remember to attach " + showLang + " Paper!";
+
+    getAllWriters(lang);
 };
 
 /**
@@ -64,14 +77,17 @@ function getPredictions(fileName) {
     const errorAlert = document.getElementById("errorAlert");
     const writers = document.getElementById('writersList');
 
+    var hrefParams = new URL(location.href);
+    const lang = hrefParams.searchParams.get("lang");
+
 
     var ids = [];
     for (var i = 0; i < chosenwriters.length; i++) {
         ids.push(parseInt(chosenwriters[i].id));
     }
 
-    var isArabic = document.getElementById("language").checked;
-    var lang = isArabic ? "ar" : "en";
+    // var isArabic = document.getElementById("language").checked;
+    // var lang = isArabic ? "ar" : "en";
     var data = {
         _filename: fileName,
         writers_ids: ids
@@ -120,8 +136,8 @@ function getPredictions(fileName) {
 /**
  * Get all writers to choose between them
  */
-function getAllWriters() {
-    var url = "http://" + localhost + "/writers";
+function getAllWriters(lang) {
+    var url = "http://" + localhost + "/writers?lang=" + lang;
 
     var selectElement = document.getElementById('writersList');
     const noWritersAlert = document.getElementById("noWritersAlert");

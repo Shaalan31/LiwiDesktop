@@ -41,7 +41,7 @@
                     <a class="nav-link" href="./addwriter.html">Add Writer</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="./predict.html">Identify Writer</a>
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModalCenter">Identify Writer</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="./updatewriter.html">Update Writer</a>
@@ -84,13 +84,13 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-sm-6 col-md-6 col-lg-6 col-xs-6">Identify Writer</div>
-                            <div class="form-group custom-control custom-switch col-sm-6 col-md-6 col-lg-6 col-xs-6">
-                                <input type="checkbox" class="custom-control-input" id="language">
-                                <label class="custom-control-label" for="language">Toggle this for arabic</label>
-                                <small id="passwordHelpInline" class="text-muted">
-                                    Default is English.
-                                </small>
-                            </div>
+<!--                            <div class="form-group custom-control custom-switch col-sm-6 col-md-6 col-lg-6 col-xs-6">-->
+<!--                                <input type="checkbox" class="custom-control-input" id="language">-->
+<!--                                <label class="custom-control-label" for="language">Toggle this for arabic</label>-->
+<!--                                <small id="passwordHelpInline" class="text-muted">-->
+<!--                                    Default is English.-->
+<!--                                </small>-->
+<!--                            </div>-->
                         </div>
                     </div>
                     <div class="card-body">
@@ -119,6 +119,11 @@
                                                         required = "required"
                                                         onclick="chooseWriter()">
                                                 </select>
+                                                <small class="text-muted"
+                                                       style="color: darkred !important; font-style: italic;">
+                                                    <i class="fas fa-exclamation-triangle"></i>
+                                                    If you didn't find a specific writer, then you have to add sample papers for him first!
+                                                </small>
                                             </div>
 
                                             <!-- list of writers -->
@@ -128,10 +133,9 @@
                                             <div class="form-group col-xs-12 col-sm-12 col-lg-12 col-md-12">
                                                 <label for="AttachedFile">Enter Writer's Paper</label>
                                                 <input type="file" class="form-control-file" id="AttachedFile" name="AttachedFile" required="required" onchange="readURL(this);">
-                                                <small class="text-muted"
+                                                <small id="rememberMessage" class="text-muted"
                                                        style="color: darkred !important; font-style: italic;">
                                                     <i class="fas fa-exclamation-triangle"></i>
-                                                    Please Remember to Choose the Right Language From the Top!
                                                 </small>
                                             </div>
 
@@ -157,6 +161,27 @@
         </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-sm" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Choose Language</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Do you want to identify English or Arabic paper?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning" onclick="redirect_view('en')">English</button>
+                    <button type="button" class="btn btn-warning" onclick="redirect_view('ar')">Arabic</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- footer -->
     <div id="footer"></div>
@@ -171,5 +196,6 @@
     <script src="../public/js/predict.js"></script>
     <script src="../public/js/jquery.redirect.js"></script>
     <script src="../public/js/script-fns.js"></script>
+    <script src="../public/js/language.js"></script>
 </body>
 </html>

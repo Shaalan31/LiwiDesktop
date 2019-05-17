@@ -33,7 +33,7 @@
             <a class="nav-link" href="views/addwriter.html">Add Writer</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="views/predict.html">Identify Writer</a>
+            <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModalCenter">Identify Writer</a>
           </li>
           <li class="nav-item active">
             <a class="nav-link" href="views/updatewriter.html">Update Writer</a>
@@ -55,8 +55,31 @@
       <div class="row col-lg-12 col-md-12 col-xs-12 col-sm-12">
 <!--        <button type="button" style="color:white; background-color: #800028" class="btn btn-warning btn-lg btn-block">Identify a Writer</button>-->
 <!--        <button type="button" style="color:white; background-color: #800028" class="btn btn-warning btn-lg btn-block">Add New Writer to the System</button>-->
-        <button type="button" class="btn btn-warning btn-lg btn-block" onclick="location.href = 'views/predict.html';">Identify a Writer</button>
+<!--        <button type="button" class="btn btn-warning btn-lg btn-block" onclick="location.href = 'views/predict.html';">Identify a Writer</button>-->
+        <button type="button" class="btn btn-warning btn-lg btn-block" data-toggle="modal" data-target="#exampleModalCenter">Identify a Writer</button>
         <button type="button" class="btn btn-warning btn-lg btn-block" onclick="location.href = 'views/addwriter.html';">Add New Writer to the System</button>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-sm" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">Choose Language</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Do you want to identify English or Arabic paper?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-warning" onclick="redirect('en')">English</button>
+            <button type="button" class="btn btn-warning" onclick="redirect('ar')">Arabic</button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -70,5 +93,7 @@
     </script>
     <!-- footer -->
     <script src="./views/layouts/footer.js"></script>
+    <script src="public/js/jquery.redirect.js"></script>
+    <script src="public/js/language.js"></script>
   </body>
 </html>
