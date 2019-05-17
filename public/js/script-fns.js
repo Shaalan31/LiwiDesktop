@@ -100,11 +100,15 @@ function filterFunction(update) {
 function readURL(input) {
 
     // remove the validation alert
-    // const file = document.getElementById("AttachedFile");
     input.setCustomValidity("");
     input.reportValidity();
 
     if (input.files && input.files[0]) {
+        if(input.files[0].name.includes(".tif")){
+            document.getElementById("attachedimage").setAttribute("hidden", "hidden");
+            return;
+        }
+
         var reader = new FileReader();
 
         reader.onload = function (e) {
@@ -117,5 +121,4 @@ function readURL(input) {
 
         reader.readAsDataURL(input.files[0]);
     }
-
 }
