@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LIWI - Identify Writer</title>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>LIWI< - Identify a Writer</title>
+
+    <link href="../public/css/blocks.css" rel="stylesheet">
+
+    <!-- Bootstrap core CSS -->
+    <link href="../public/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+
+</head>
+<body class="background">
+
+    <!-- header -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="../public/img/logo_transparent.png" width="100" height="50" class="d-inline-block align-top" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="./addwriter.html">Add Writer</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModalCenter">Identify Writer</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="./updatewriter.html">Update Writer</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <h1 class="text-center display-3">Update Writer</h1>
+    <blockquote class="blockquote text-center">
+        <p class="mb-0">Attach your <cite title="Source Title">Writer's Training Paper</cite>. Choose it wisely!</p>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="alert alert-success" role="alert" hidden>
+                    Training paper uploaded successfully.
+                </div>
+
+                <!-- alert in case of error in server -->
+                <div class="alert alert-danger" role="alert" hidden="hidden" id="errorAlert">
+                    Error occurred!
+                    <em> Make sure to choose <strong>the right language</strong>!</em>
+                </div>
+
+                <!-- alert in case of writer not found in server -->
+                <div class="alert alert-danger" role="alert" hidden="hidden"  id="notFoundAlert">
+                    Error occurred! Please try again later. Writer is not found.
+                </div>
+
+                <!-- alert in case of error in server -->
+                <div class="alert alert-danger" role="alert" hidden="hidden" id="generalErrorAlert">
+                    Error occurred! Please try again later.
+                </div>
+
+                <!-- alert in case of error in server -->
+                <div class="alert alert-danger" role="alert" hidden="hidden" id="noWritersAlert">
+                    Error occurred!
+                    <em> No writers found in the system. <strong>Please add writers first.</strong></em>
+                </div>
+
+                <!-- Card Form -->
+                <div class="card border-warning mb-3" style="background-color: rgba(255, 255, 255, 0.82)">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-xs-6">Update Writer</div>
+                            <div class="form-group custom-control custom-switch col-sm-6 col-md-6 col-lg-6 col-xs-6">
+                                <input type="checkbox" class="custom-control-input" id="language">
+                                <label class="custom-control-label" for="language">Toggle this for arabic</label>
+                                <small id="passwordHelpInline" class="text-muted">
+                                    Default is English.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <form class="form-horizontal" method="POST" action="" name="identifywriter" id="identifywriter">
+                                    <div class="container">
+                                        <div class="row col-xs-12 col-sm-12 col-lg-12 col-md-12">
+
+                                            <!-- switch to choose between arabic and english -->
+                                            <div class="form-row align-items-center col-xs-12 col-sm-12 col-lg-12 col-md-12">
+                                                <div class="input-group col-md-6 form-group">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">Search</div>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="search" placeholder="Search for writer.." onkeyup="filterFunction(true)">
+                                                </div>
+                                            </div>
+
+                                            <!-- select writer -->
+                                            <div id="dropdown" class="form-group col-xs-12 col-sm-12 col-lg-12 col-md-12">
+                                                <select class="form-control" name="writersList" id="writersList" style="background-color: rgba(255, 255, 255, 0.82)">
+                                                    <option id="0"></option>
+                                                </select>
+                                            </div>
+
+                                            <!-- list of writers -->
+                                            <div class="form-group col-xs-12 col-sm-12 col-lg-12 col-md-12" id="writers"></div>
+
+                                            <!-- attach writer's paper -->
+                                            <div class="form-group col-xs-12 col-sm-12 col-lg-12 col-md-12">
+                                                <label for="trainingpaper">Enter Writer's Paper</label>
+                                                <input type="file" class="form-control-file" id="trainingpaper" onchange="readURL(this);">
+                                                <small class="text-muted" style="color: darkred !important; font-style: italic;">
+                                                    <i class="fas fa-exclamation-triangle"></i>
+                                                    Please Remember to Choose the Right Paper For the Writer & the Right
+                                                    Language!
+                                                </small>
+                                            </div>
+
+                                            <!-- show the attached image -->
+                                            <div class="col-xs-12 col-sm-12 col-lg-12 col-md-12">
+                                                <img class="offset-3" id="attachedimage" src="#" alt="Writer's Paper" hidden onerror="this.setAttribute('hidden', 'hidden');">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <button id="updateButton" type="submit" class="btn btn-warning btn-lg" style="float: right" onclick="updateWriter()">Add Paper &raquo;</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-sm" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Choose Language</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Do you want to identify English or Arabic paper?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning" onclick="redirect_view('en')">English</button>
+                    <button type="button" class="btn btn-warning" onclick="redirect_view('ar')">Arabic</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+    <!-- footer -->
+    <div id="footer"></div>
+
+    <!-- Scripts -->
+    <script>
+        window.$ = window.jQuery = require('jquery');
+        require('bootstrap');
+
+        $(function() {
+            loadUsers();
+        });
+    </script>
+    <!-- footer -->
+    <script src="./layouts/footer.js"></script>
+    <script src="../public/js/script-fns.js"></script>
+    <script src="../public/js/updatewriter.js"></script>
+    <script src="../public/js/jquery.redirect.js"></script>
+    <script src="../public/js/language.js"></script>
+</body>
+</html>
