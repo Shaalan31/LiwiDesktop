@@ -1,21 +1,21 @@
 var localhost = "localhost:5000";
-var predictions = [];
-window.onload = function () {
+
+function predictOnLoad() {
     // get language
     var hrefParams = new URL(location.href);
     const lang = hrefParams.searchParams.get("lang");
     var showLang;
 
     // Show the language in the message
-    if(lang == 'ar')
+    if (lang === 'ar')
         showLang = "Arabic";
     else
         showLang = "English";
     document.getElementById("rememberMessage").innerHTML = document.getElementById("rememberMessage").innerHTML
-                                                                    + "Please remember to attach " + showLang + " Paper!";
+        + "Please remember to attach " + showLang + " Paper!";
 
     getAllWriters(lang);
-};
+}
 
 /**
  * Function called to predict the writer
@@ -31,7 +31,7 @@ function uploadImage() {
     // Validate prediction input
     const predictButton = document.getElementById("predictButton");
 
-    if(!validatePrediction())
+    if (!validatePrediction())
         return;
     else {
         predictButton.disabled = true;
@@ -110,19 +110,20 @@ function getPredictions(fileName) {
 
             errorAlert.setAttribute("hidden", "hidden");
 
-            predictions=response.data;
+            var predictions = response.data;
+            window.localStorage.setItem("predictions", JSON.stringify(predictions)); // Saving
             $.redirect("prediction.html",
-                    {
-                        predictions: predictions,
-                    },
-                    "GET");
+                {
+                    lang: lang
+                },
+                "GET");
         },
         error: function (error) {
 
             predictButton.disabled = false;
             predictButton.innerHTML = "Add &raquo;";
 
-            if(error.status == 400){
+            if (error.status === 400) {
                 writers.setCustomValidity("You have exceeded the number of chosen writers.");
                 writers.reportValidity();
 
@@ -158,7 +159,7 @@ function getAllWriters(lang) {
             }
         },
         error: function (error) {
-            if(error.status == 404)
+            if (error.status == 404)
                 noWritersAlert.removeAttribute("hidden");
             else
                 generalErrorAlert.removeAttribute("hidden");
@@ -174,7 +175,7 @@ function validatePrediction() {
     const writers = document.getElementById('writersList');
     const file = document.getElementById("AttachedFile");
 
-    if(chosenwriters.length == 0){
+    if (chosenwriters.length === 0) {
         writers.setCustomValidity("Please choose writers to identify between them!");
         writers.reportValidity();
         return false;
@@ -183,7 +184,7 @@ function validatePrediction() {
         writers.reportValidity();
     }
 
-    if(file.files.length == 0){
+    if (file.files.length === 0) {
         file.setCustomValidity("Please attach the paper!");
         file.reportValidity();
         return false;
