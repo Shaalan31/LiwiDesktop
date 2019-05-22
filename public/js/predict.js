@@ -103,7 +103,7 @@ function getPredictions(fileName) {
         dataType: 'json',
         success: function (response) {
             predictButton.disabled = false;
-            predictButton.innerHTML = "Add &raquo;";
+            predictButton.innerHTML = "Identify &raquo;";
 
             writers.setCustomValidity("");
             writers.reportValidity();
@@ -121,7 +121,7 @@ function getPredictions(fileName) {
         error: function (error) {
 
             predictButton.disabled = false;
-            predictButton.innerHTML = "Add &raquo;";
+            predictButton.innerHTML = "Identify &raquo;";
 
             if (error.status === 400) {
                 writers.setCustomValidity("You have exceeded the number of chosen writers.");

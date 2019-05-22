@@ -7,6 +7,22 @@
 function loadPredictions() {
     const predictions = JSON.parse(window.localStorage.getItem("predictions"));
 
+    var secondCard = document.getElementById('secondCard');
+    var thirdCard = document.getElementById('thirdCard');
+    var SecondaryTitle = document.getElementById('SecondaryTitle');
+    var SecondarySubtitle = document.getElementById('SecondarySubtitle');
+    switch (predictions.length) {
+        case 1:
+            secondCard.style.display = "none";
+            thirdCard.style.display = "none";
+            SecondaryTitle.style.display = "none";
+            SecondarySubtitle.style.display = "none";
+            break;
+        case 2:
+            thirdCard.style.display = "none";
+            break;
+    }
+
     for (let i = 0; i < predictions.length; i++) {
         switch (i) {
             case 0:
@@ -26,9 +42,27 @@ function loadPredictions() {
                 imageP.src = predictions[i]._image;
                 break;
             case 1:
+                var BtnNameS = document.getElementById('BtnNameS');
+                var imageS = document.getElementById('imageS');
+                var NameS = document.getElementById('NameS');
+                var username = document.getElementById('username1');
+                var address = document.getElementById('address1');
+                var nid1 = document.getElementById('nid1');
+                var birthday1 = document.getElementById('birthday1');
+                var phone1 = document.getElementById('phone1');
+
+                BtnNameS.innerHTML += (" " + predictions[i]._name);
+                imageS.src = predictions[i]._image;
+                NameS.innerHTML += (" " + predictions[i]._name);
+                username.innerHTML += (" " + predictions[i]._username);
+                address.innerHTML += (" " + predictions[i]._address);
+                nid1.innerHTML += (" " + predictions[i]._nid);
+                phone1.innerHTML += (" " + predictions[i]._phone);
+                birthday1.innerHTML += (" " + predictions[i]._birthday);
                 break;
             case 2:
                 break;
         }
     }
+    window.localStorage.removeItem("predictions");
 }
