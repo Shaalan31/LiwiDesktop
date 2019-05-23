@@ -89,8 +89,8 @@ function getPredictions(fileName) {
     // var isArabic = document.getElementById("language").checked;
     // var lang = isArabic ? "ar" : "en";
     var data = {
-        _filename: fileName,
-        writers_ids: ids
+        _filename: fileName
+        // writers_ids: ids
     };
 
     var url = "http://" + localhost + "/predict?lang=" + lang;
@@ -172,17 +172,17 @@ function getAllWriters(lang) {
  * @returns {boolean}
  */
 function validatePrediction() {
-    const writers = document.getElementById('writersList');
+    // const writers = document.getElementById('writersList');
     const file = document.getElementById("AttachedFile");
 
-    if (chosenwriters.length === 0) {
-        writers.setCustomValidity("Please choose writers to identify between them!");
-        writers.reportValidity();
-        return false;
-    } else {
-        writers.setCustomValidity("");
-        writers.reportValidity();
-    }
+    // if (chosenwriters.length === 0) {
+    //     writers.setCustomValidity("Please choose writers to identify between them!");
+    //     writers.reportValidity();
+    //     return false;
+    // } else {
+    //     writers.setCustomValidity("");
+    //     writers.reportValidity();
+    // }
 
     if (file.files.length === 0) {
         file.setCustomValidity("Please attach the paper!");
