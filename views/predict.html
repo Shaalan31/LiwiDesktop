@@ -21,133 +21,181 @@
           integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 
 </head>
-<body class="background">
+<body class="background" onload="predictOnLoad()">
 
-<!-- header -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">
-        <img src="../public/img/logo_transparent.png" width="100" height="50" class="d-inline-block align-top" alt="">
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="../index.html">Home</a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="./addwriter.html">Add Writer</a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="./predict.html">Identify Writer</a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="./updatewriter.html">Update Writer</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+    <!-- header -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="../public/img/logo_transparent.png" width="100" height="50" class="d-inline-block align-top" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="./addwriter.html">Add Writer</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModalCenter">Identify Writer</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="./updatewriter.html">Update Writer</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-<h1 class="text-center display-3">Identify Writer</h1>
-<blockquote class="blockquote text-center">
-    <p class="mb-0">Choose writers to identify between them and attach your <cite title="Source Title">Writer's
-        Paper</cite>.</p>
-</blockquote>
+    <h1 class="text-center display-3">Identify Writer</h1>
+    <blockquote class="blockquote text-center">
+        <p class="mb-0">Choose writers to identify between them and attach your <cite title="Source Title">Writer's
+            Paper</cite>.</p>
+    </blockquote>
 
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12">
 
-            <!-- Card Form -->
-            <div class="card border-warning mb-3" style="background-color: rgba(255, 255, 255, 0.82)">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-sm-6 col-md-6 col-lg-6 col-xs-6">Identify Writer</div>
-                        <div class="form-group custom-control custom-switch col-sm-6 col-md-6 col-lg-6 col-xs-6">
-                            <input type="checkbox" class="custom-control-input" id="language">
-                            <label class="custom-control-label" for="language">Toggle this for arabic</label>
-                            <small id="passwordHelpInline" class="text-muted">
-                                Default is English.
-                            </small>
+                <!-- alert in case of error in server -->
+                <div class="alert alert-danger" role="alert" hidden="hidden" id="errorAlert">
+                    Error occurred!
+                    <em> Make sure to choose <strong>the right paper</strong> according to language.</em>
+                </div>
+
+                <!-- alert in case of error in server -->
+                <div class="alert alert-danger" role="alert" hidden="hidden" id="generalErrorAlert">
+                    Error occurred! Please try again later.
+                </div>
+
+                <!-- alert in case of error in server -->
+                <div class="alert alert-danger" role="alert" hidden="hidden" id="noWritersAlert">
+                    Error occurred!
+                    <em> No writers found in the system. <strong>Please add writers first.</strong></em>
+                </div>
+
+
+
+                <!-- Card Form -->
+                <div class="card border-warning mb-3" style="background-color: rgba(255, 255, 255, 0.82)">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-xs-6">Identify Writer</div>
+<!--                            <div class="form-group custom-control custom-switch col-sm-6 col-md-6 col-lg-6 col-xs-6">-->
+<!--                                <input type="checkbox" class="custom-control-input" id="language">-->
+<!--                                <label class="custom-control-label" for="language">Toggle this for arabic</label>-->
+<!--                                <small id="passwordHelpInline" class="text-muted">-->
+<!--                                    Default is English.-->
+<!--                                </small>-->
+<!--                            </div>-->
                         </div>
                     </div>
-                </div>
-                <div class="card-body">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <form class="form-horizontal" method="POST" action="" name="identifywriter">
-                                <div class="container">
-                                    <div class="row col-xs-12 col-sm-12 col-lg-12 col-md-12">
+                    <div class="card-body">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <form class="form-horizontal" method="POST" action="" name="identifywriter">
+                                    <div class="container">
+                                        <div class="row col-xs-12 col-sm-12 col-lg-12 col-md-12">
 
-                                        <!-- switch to choose between arabic and english -->
-                                        <div class="form-row align-items-center col-xs-12 col-sm-12 col-lg-12 col-md-12">
-                                            <div class="input-group col-md-6 form-group">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">Search</div>
+                                            <!-- switch to choose between arabic and english -->
+                                            <div class="form-row align-items-center col-xs-12 col-sm-12 col-lg-12 col-md-12">
+                                                <div class="input-group col-md-6 form-group">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">Search</div>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="search"
+                                                           placeholder="Search for writers.."
+                                                           onkeyup="filterFunction(false)">
                                                 </div>
-                                                <input type="text" class="form-control" id="search"
-                                                       placeholder="Search for writers.."
-                                                       onkeyup="filterFunction(false)">
                                             </div>
-                                        </div>
 
-                                        <!-- select writers -->
-                                        <div id="dropdown" class="form-group col-xs-12 col-sm-12 col-lg-12 col-md-12">
-                                            <select multiple class="form-control" id="writersList"
-                                                    style="background-color: rgba(255, 255, 255, 0.3)"
-                                                    onclick="chooseWriter()">
-                                                <!--                                                <option id="1">Omar Ali <span>-oshaalan3</span></option>-->
-                                                <!--                                                <option id="2">Ahmed Khairy <span>-akhairy1</span></option>-->
-                                                <!--                                                <option id="3">May Ahmed <span>-mayahmed2</span></option>-->
-                                                <!--                                                <option id="4">Samar Gamal <span>-sgamal1</span></option>-->
-                                                <!--                                                <option id="5">Salma Ibrahim <span>sibrahim2</span></option>-->
-                                            </select>
-                                        </div>
+                                            <!-- select writers -->
+                                            <div id="dropdown" class="form-group col-xs-12 col-sm-12 col-lg-12 col-md-12">
+                                                <select multiple class="form-control" id="writersList"
+                                                        style="background-color: rgba(255, 255, 255, 0.3)"
+                                                        required = "required"
+                                                        onclick="chooseWriter()">
+                                                </select>
+                                                <small class="text-muted"
+                                                       style="color: darkred !important; font-style: italic;">
+                                                    <i class="fas fa-exclamation-triangle"></i>
+                                                    If you didn't find a specific writer, then you have to add sample papers for him first!
+                                                </small>
+                                            </div>
 
-                                        <!-- list of writers -->
-                                        <div class="form-group col-xs-12 col-sm-12 col-lg-12 col-md-12"
-                                             id="writers"></div>
+                                            <!-- list of writers -->
+                                            <div class="form-group col-xs-12 col-sm-12 col-lg-12 col-md-12" id="writers"></div>
 
-                                        <!-- attach writer's paper -->
-                                        <div class="form-group col-xs-12 col-sm-12 col-lg-12 col-md-12">
-                                            <label for="AttachedFile">Enter Writer's Paper</label>
-                                            <input type="file" class="form-control-file" id="AttachedFile"
-                                                   name="AttachedFile">
-                                            <small class="text-muted"
-                                                   style="color: darkred !important; font-style: italic;">
-                                                <i class="fas fa-exclamation-triangle"></i>
-                                                Please Remember to Choose the Right Language From the Top!
-                                            </small>
+                                            <!-- attach writer's paper -->
+                                            <div class="form-group col-xs-12 col-sm-12 col-lg-12 col-md-12">
+                                                <label for="AttachedFile">Enter Writer's Paper</label>
+                                                <input type="file" class="form-control-file" id="AttachedFile" name="AttachedFile" required="required" onchange="readURL(this);">
+                                                <small id="rememberMessage" class="text-muted"
+                                                       style="color: darkred !important; font-style: italic;">
+                                                    <i class="fas fa-exclamation-triangle"></i>
+                                                </small>
+                                            </div>
+
+                                            <!-- show the attached image -->
+                                            <div class="col-xs-12 col-sm-12 col-lg-12 col-md-12">
+                                                <img class="offset-3" id="attachedimage" src="#" alt="Writer's Paper" hidden onerror="this.setAttribute('hidden', 'hidden');">
+                                            </div>
+
+                                            <br>
                                         </div>
-                                        <br>
+                                    </div>
+                                </form>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-lg-12 col-md-12">
+                                        <button id="predictButton" type="submit" class="btn btn-warning btn-lg" onclick="predict();" style="float: right">Identify &raquo;</button>
                                     </div>
                                 </div>
-                            </form>
-                            <button type="submit" class="btn btn-warning btn-lg" onclick="predict();"
-                                    style="float: right">Identify
-                            </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-sm" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Choose Language</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Do you want to identify English or Arabic paper?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning" onclick="redirect_view('en')">English</button>
+                    <button type="button" class="btn btn-warning" onclick="redirect_view('ar')">Arabic</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<!-- footer -->
-<div id="footer"></div>
+    <!-- footer -->
+    <div id="footer"></div>
 
-<!-- Scripts -->
-<script>
-    window.$ = window.jQuery = require('jquery');
-    require('bootstrap');
-</script>
-<!-- footer -->
-<script src="./layouts/footer.js"></script>
-<script src="../public/js/script-fns.js"></script>
-<script src="../public/js/predict.js"></script>
+    <!-- Scripts -->
+    <script>
+        window.$ = window.jQuery = require('jquery');
+        require('bootstrap');
+    </script>
+    <!-- footer -->
+    <script src="./layouts/footer.js"></script>
+    <script src="../public/js/predict.js"></script>
+    <script src="../public/js/jquery.redirect.js"></script>
+    <script src="../public/js/script-fns.js"></script>
+    <script src="../public/js/language.js"></script>
 </body>
 </html>
