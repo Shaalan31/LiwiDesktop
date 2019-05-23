@@ -1,3 +1,4 @@
+.idea/
 # Logs
 logs
 *.log
@@ -61,4 +62,3 @@ typings/
 .next
 
 
-.idea/
