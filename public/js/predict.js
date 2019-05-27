@@ -7,7 +7,7 @@ function predictOnLoad() {
     const socketIOClient = require('socket.io-client')
     const ioClient = socketIOClient.connect("http://127.0.0.1:5000");
     ioClient.on('LIWI', function (data) {
-        loadImageIntoPopUp(data.url)
+        loadImageIntoPopUp(data.url, data.label);
     });
 
     // get language
@@ -26,9 +26,13 @@ function predictOnLoad() {
     getAllWriters(lang);
 }
 
-function loadImageIntoPopUp(url) {
-    let img = document.getElementById('currentModelStep');
-    img.src = url;
+function loadImageIntoPopUp(url, label) {
+    let SlideShow = document.getElementById('SlideShow');
+
+    var caption = '<p>' + label + '</p>';
+    var img = '<img src="' + url + '" style="width:100%">';
+    var div = '<div class="mySlides">' + img + caption + '</div>';
+    SlideShow.innerHTML = div + SlideShow.innerHTML;
 }
 
 /**

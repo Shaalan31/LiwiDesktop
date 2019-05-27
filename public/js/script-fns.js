@@ -2,7 +2,8 @@
  * Function to choose writers and add them to text box
  */
 var chosenwriters = [];
-function chooseWriter(){
+
+function chooseWriter() {
     var found = false;
     var writer_id = document.forms['identifywriter']['writersList'][document.getElementById("writersList").selectedIndex].id;
     var writer_name = document.forms['identifywriter']['writersList'].value;
@@ -14,17 +15,17 @@ function chooseWriter(){
     writersList.reportValidity();
 
 
-    if(chosenwriters.length != 0) {
-        for(var i = 0; i < chosenwriters.length; i++){
-            if(chosenwriters[i].name.toLowerCase().trim() == writer_name.toLowerCase().trim()){
+    if (chosenwriters.length != 0) {
+        for (var i = 0; i < chosenwriters.length; i++) {
+            if (chosenwriters[i].name.toLowerCase().trim() == writer_name.toLowerCase().trim()) {
                 found = true;
                 break;
             }
         }
-        if(!found){
+        if (!found) {
             writers.innerHTML = writers.innerHTML +
                 '<div class="input-group mb-3">' +
-                '<input style="background-color: rgba(255, 255, 255, 0.3)" type="text" name="chosenwriters[]" class="form-control" readonly="readonly" value="'+ writer_name +'" id="room' + writer_name.trim().toLowerCase() +'">' +
+                '<input style="background-color: rgba(255, 255, 255, 0.3)" type="text" name="chosenwriters[]" class="form-control" readonly="readonly" value="' + writer_name + '" id="room' + writer_name.trim().toLowerCase() + '">' +
                 '<div class="input-group-append">' +
                 '<button class="btn btn-outline-danger" type="button" onclick="deleteWriter(&#39;' + writer_name + '&#39;, this);"><i class="fas fa-user-minus"></i></button>' +
                 '</div>' +
@@ -37,7 +38,7 @@ function chooseWriter(){
         chosenwriters.push({id: writer_id, name: writer_name.toLowerCase().trim()})
         writers.innerHTML = writers.innerHTML +
             '<div class="input-group mb-3">' +
-            '<input style="background-color: rgba(255, 255, 255, 0.3)" type="text" name="chosenwriters[]" class="form-control" readonly="readonly" value="'+ writer_name +'" id="room' + writer_name.trim().toLowerCase() +'">' +
+            '<input style="background-color: rgba(255, 255, 255, 0.3)" type="text" name="chosenwriters[]" class="form-control" readonly="readonly" value="' + writer_name + '" id="room' + writer_name.trim().toLowerCase() + '">' +
             '<div class="input-group-append">' +
             '<button class="btn btn-outline-danger" type="button" onclick="deleteWriter(&#39;' + writer_name + '&#39;, this);"><i class="fas fa-user-minus"></i></button>' +
             '</div>' +
@@ -49,9 +50,9 @@ function chooseWriter(){
  * Delete writer from chosenWriters list
  * @param writer_id
  */
-function deleteWriter(writer_name, e){
-    for(var i = 0; i < chosenwriters.length; i++){
-        if(chosenwriters[i].name.toLowerCase().trim() == writer_name.toLowerCase().trim()){
+function deleteWriter(writer_name, e) {
+    for (var i = 0; i < chosenwriters.length; i++) {
+        if (chosenwriters[i].name.toLowerCase().trim() == writer_name.toLowerCase().trim()) {
             //delete from array
             chosenwriters.splice(i, 1);
             e.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode);
@@ -65,19 +66,19 @@ function deleteWriter(writer_name, e){
  * filter dropdown list
  */
 function filterFunction(update) {
-    var input, filter, writers, i,firstTime;
+    var input, filter, writers, i, firstTime;
     input = document.getElementById("search");
     filter = input.value.toUpperCase();
     div = document.getElementById("dropdown");
     writers = div.getElementsByTagName("option");
-    firstTime=true;
+    firstTime = true;
     for (i = 0; i < writers.length; i++) {
         txtValue = writers[i].textContent || writers[i].innerText;
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
             writers[i].style.display = "";
 
             // if found first time when update writer we select it
-            if(firstTime && update) {
+            if (firstTime && update) {
                 writers[i].selected = 'selected';
                 firstTime = false;
             }
@@ -87,8 +88,7 @@ function filterFunction(update) {
     }
 
     // if nothing found when update writer we select top one "empty"
-    if(firstTime && update)
-    {
+    if (firstTime && update) {
         writers[0].selected = 'selected';
     }
 }
@@ -104,7 +104,7 @@ function readURL(input) {
     input.reportValidity();
 
     if (input.files && input.files[0]) {
-        if(input.files[0].name.includes(".tif")){
+        if (input.files[0].name.includes(".tif")) {
             document.getElementById("attachedimage").setAttribute("hidden", "hidden");
             return;
         }
@@ -133,10 +133,16 @@ function plusDivs(n) {
 function showDivs(n) {
     var i;
     var x = document.getElementsByClassName("mySlides");
-    if (n > x.length) {slideIndex = 1}
-    if (n < 1) {slideIndex = x.length}
+    if (x.length === 0) return;
+    if (n > x.length) {
+        slideIndex = 1
+    }
+    if (n < 1) {
+        slideIndex = x.length
+    }
     for (i = 0; i < x.length; i++) {
         x[i].style.display = "none";
     }
-    x[slideIndex-1].style.display = "block";
+
+    x[slideIndex - 1].style.display = "block";
 }

@@ -1,6 +1,15 @@
+// import io from 'socket.io-client';
+// const socketIOClient = require('socket.io-client')
+
 var localhost = "localhost:5000";
 
 function predictOnLoad() {
+    const socketIOClient = require('socket.io-client')
+    const ioClient = socketIOClient.connect("http://127.0.0.1:5000");
+    ioClient.on('LIWI', function (data) {
+        loadImageIntoPopUp(data.url, data.label);
+    });
+
     // get language
     var hrefParams = new URL(location.href);
     const lang = hrefParams.searchParams.get("lang");
@@ -15,6 +24,15 @@ function predictOnLoad() {
         + "Please remember to attach " + showLang + " Paper!";
 
     getAllWriters(lang);
+}
+
+function loadImageIntoPopUp(url, label) {
+    let SlideShow = document.getElementById('SlideShow');
+
+    var caption = '<p>' + label + '</p>';
+    var img = '<img src="' + url + '" style="width:100%">';
+    var div = '<div class="mySlides">' + img + caption + '</div>';
+    SlideShow.innerHTML = div + SlideShow.innerHTML;
 }
 
 /**
@@ -81,13 +99,16 @@ function getPredictions(fileName) {
     const lang = hrefParams.searchParams.get("lang");
 
 
-    var ids = [];
-    for (var i = 0; i < chosenwriters.length; i++) {
-        ids.push(parseInt(chosenwriters[i].id));
-    }
+    // var ids = [];
+    // for (var i = 0; i < chosenwriters.length; i++) {
+    //     ids.push(parseInt(chosenwriters[i].id));
+    // }
 
     // var isArabic = document.getElementById("language").checked;
     // var lang = isArabic ? "ar" : "en";
+
+    document.getElementById("buttonImages").click();
+
     var data = {
         _filename: fileName
         // writers_ids: ids
