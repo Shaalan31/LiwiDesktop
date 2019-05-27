@@ -4,9 +4,10 @@
 var localhost = "localhost:5000";
 
 function predictOnLoad() {
+    const socketIOClient = require('socket.io-client')
     const ioClient = socketIOClient.connect("http://127.0.0.1:5000");
     ioClient.on('LIWI', function (data) {
-        alert("KHAIRYYYYY B2A");
+        loadImageIntoPopUp(data.url)
     });
 
     // get language
@@ -23,6 +24,11 @@ function predictOnLoad() {
         + "Please remember to attach " + showLang + " Paper!";
 
     getAllWriters(lang);
+}
+
+function loadImageIntoPopUp(url) {
+    let img = document.getElementById('currentModelStep');
+    img.src = url;
 }
 
 /**
