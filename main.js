@@ -21,7 +21,7 @@ function createWindow () {
 
   mainWindow.maximize()
 
-  mainWindow.setMenu(null)
+  // mainWindow.setMenu(null)
 
   // load the index.html of the public.
   mainWindow.loadFile('index.html')

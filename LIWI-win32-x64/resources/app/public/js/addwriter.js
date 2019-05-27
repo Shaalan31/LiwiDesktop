@@ -75,7 +75,7 @@ function addWriter() {
                 },
                 error: function (error) {
                     createButton.disabled = false;
-                    createButton.innerHTML = "Identify &raquo;";
+                    createButton.innerHTML = "Create &raquo;";
 
                     if(error.status == 409){
                         const username = document.getElementById("username");
