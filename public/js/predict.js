@@ -1,5 +1,5 @@
 // import io from 'socket.io-client';
-const socketIOClient = require('socket.io-client')
+// const socketIOClient = require('socket.io-client')
 
 var localhost = "localhost:5000";
 
@@ -89,13 +89,16 @@ function getPredictions(fileName) {
     const lang = hrefParams.searchParams.get("lang");
 
 
-    var ids = [];
-    for (var i = 0; i < chosenwriters.length; i++) {
-        ids.push(parseInt(chosenwriters[i].id));
-    }
+    // var ids = [];
+    // for (var i = 0; i < chosenwriters.length; i++) {
+    //     ids.push(parseInt(chosenwriters[i].id));
+    // }
 
     // var isArabic = document.getElementById("language").checked;
     // var lang = isArabic ? "ar" : "en";
+
+    document.getElementById("buttonImages").click();
+
     var data = {
         _filename: fileName
         // writers_ids: ids
