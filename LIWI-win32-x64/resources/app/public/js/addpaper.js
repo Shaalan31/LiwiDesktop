@@ -87,7 +87,7 @@ function addPaper(){
 
                     const Swal = require('sweetalert2');
                     Swal.fire(
-                        'Training Done',
+                        'Adding Sample Paper Done',
                         '',
                         'success'
                       )
