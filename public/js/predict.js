@@ -4,10 +4,10 @@ const socketIOClient = require('socket.io-client')
 var localhost = "localhost:5000";
 
 function predictOnLoad() {
-    // const ioClient = socketIOClient.connect("http://127.0.0.1:5000");
-    // ioClient.on('LIWI', function (data) {
-    //     alert("KHAIRYYYYY B2A");
-    // });
+    const ioClient = socketIOClient.connect("http://127.0.0.1:5000");
+    ioClient.on('LIWI', function (data) {
+        alert("KHAIRYYYYY B2A");
+    });
 
     // get language
     var hrefParams = new URL(location.href);
