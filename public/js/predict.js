@@ -28,7 +28,7 @@ function predictOnLoad() {
 
 function loadImageIntoPopUp(url, label) {
     let SlideShow = document.getElementById('SlideShow');
-    var caption = '<p>' + label + '</p>';
+    var caption = '<p class="lead" style="text-align:center;">' + label + '</p>';
 
     var img;
     if (label === 'Block Sample')
