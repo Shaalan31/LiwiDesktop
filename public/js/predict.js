@@ -28,9 +28,14 @@ function predictOnLoad() {
 
 function loadImageIntoPopUp(url, label) {
     let SlideShow = document.getElementById('SlideShow');
-
     var caption = '<p>' + label + '</p>';
-    var img = '<img src="' + url + '" style="width:100%">';
+
+    var img;
+    if (label !== 'Block Sample')
+        img = '<img src="' + url + '" style="width:100%">';
+    else
+        img = '<img src="' + url + '" style="width:50%">';
+
     var div = '<div class="mySlides">' + img + caption + '</div>';
     SlideShow.innerHTML = div + SlideShow.innerHTML;
 }
