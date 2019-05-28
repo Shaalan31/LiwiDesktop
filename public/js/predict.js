@@ -31,10 +31,12 @@ function loadImageIntoPopUp(url, label) {
     var caption = '<p>' + label + '</p>';
 
     var img;
-    if (label !== 'Block Sample')
-        img = '<img src="' + url + '" style="width:100%">';
-    else
+    if (label === 'Block Sample')
         img = '<img src="' + url + '" style="width:50%">';
+    else if (label === 'WordWithKP')
+        img = '<img src="' + url + '" style="width:25%">';
+    else
+        img = '<img src="' + url + '" style="width:100%">';
 
     var div = '<div class="mySlides">' + img + caption + '</div>';
     SlideShow.innerHTML = div + SlideShow.innerHTML;
