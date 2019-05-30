@@ -28,11 +28,24 @@ function predictOnLoad() {
 
 function loadImageIntoPopUp(url, label) {
     let SlideShow = document.getElementById('SlideShow');
+    var caption = '<p class="lead" style="text-align:center;">' + label + '</p>';
 
-    var caption = '<p>' + label + '</p>';
-    var img = '<img src="' + url + '" style="width:100%">';
-    var div = '<div class="mySlides">' + img + caption + '</div>';
-    SlideShow.innerHTML = div + SlideShow.innerHTML;
+    var img;
+    if (label === 'Block Sample')
+        img = '<img src="' + url + '" style="width:50%" class="offset-3">';
+    else if (label === 'WordWithKP')
+        img = '<img src="' + url + '" style="width:25%" class="offset-4">';
+    else
+        img = '<img src="' + url + '" style="width:100%">';
+
+    var slides = document.getElementsByClassName("mySlides");
+
+    if(slides == null || slides.length == 0)
+        var div = '<div class="mySlides">' + img + caption + '</div>';
+    else
+        var div = '<div class="mySlides" style="display: none">' + img + caption + '</div>';
+
+    SlideShow.innerHTML = SlideShow.innerHTML + div;
 }
 
 /**
