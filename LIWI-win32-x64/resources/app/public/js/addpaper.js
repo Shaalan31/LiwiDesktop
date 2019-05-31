@@ -1,6 +1,6 @@
 var localhost = "127.0.0.1:5000";
 
-$("#addPaperForm").submit(function(e) {
+$("#addPaperForm").submit(function (e) {
     e.preventDefault();
 });
 
@@ -12,26 +12,26 @@ $("#addPaperForm").submit(function(e) {
  * @return {Object}     The URL parameters
  */
 var getParams = function (url) {
-	var params = {};
-	var parser = document.createElement('a');
-	parser.href = url;
-	var query = parser.search.substring(1);
-	var vars = query.split('&');
-	for (var i = 0; i < vars.length; i++) {
-		var pair = vars[i].split('=');
-		params[pair[0]] = decodeURIComponent(pair[1]);
-	}
-	return params;
+    var params = {};
+    var parser = document.createElement('a');
+    parser.href = url;
+    var query = parser.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split('=');
+        params[pair[0]] = decodeURIComponent(pair[1]);
+    }
+    return params;
 };
 
 /**
  * Function to send request to add training paper
  */
-function addPaper(){
+function addPaper() {
     const addButton = document.getElementById("addButton");
     const errorAlert = document.getElementById("errorAlert");
 
-    if(!validateAddPaper())
+    if (!validateAddPaper())
         return;
     else {
         addButton.disabled = true;
@@ -47,7 +47,7 @@ function addPaper(){
     writerId = getParams(window.location.href).id;
     language = $.trim($('form').find('input[name="trainingpaper"]').val());
 
-    
+
     var formData = new FormData();
     formData.append('image', file);
 
@@ -60,15 +60,14 @@ function addPaper(){
         data: formData,
         success: function (response) {
             var fileName = response.data;
-            
-            var url = "http://"+localhost+"/writer?lang="; 
 
-            if ($('#language').is(":checked")){
-                url = url+'ar'
+            var url = "http://" + localhost + "/writer?lang=";
+
+            var language = 'en';
+            if ($('#language').is(":checked")) {
+                language = 'ar'
             }
-            else{
-                url = url+'en'
-            }
+            url = url + language;
             var userdata = {
                 _id: writerId,
                 _filename: fileName,
@@ -82,15 +81,7 @@ function addPaper(){
                 dataType: 'json',
                 success: function (response) {
                     errorAlert.setAttribute("hidden", "hidden");
-                    addButton.disabled = false;
-                    addButton.innerHTML = "Add &raquo;";
-
-                    const Swal = require('sweetalert2');
-                    Swal.fire(
-                        'Training Done',
-                        '',
-                        'success'
-                      )
+                    reFitClassifiers(language);
                 },
                 error: function (error) {
                     addButton.disabled = false;
@@ -112,6 +103,37 @@ function addPaper(){
     });
 }
 
+
+function reFitClassifiers(language) {
+    const addButton = document.getElementById("addButton");
+    const errorAlert = document.getElementById("errorAlert");
+
+    endPoint = "http://" + localhost + "/fitClassifiers?lang=";
+    endPoint = endPoint + language;
+    $.ajax({
+        type: "GET",
+        url: endPoint,
+        success: function (response) {
+            errorAlert.setAttribute("hidden", "hidden");
+            addButton.disabled = false;
+            addButton.innerHTML = "Add &raquo;";
+
+            const Swal = require('sweetalert2');
+            Swal.fire(
+                'Adding Sample Paper Done',
+                '',
+                'success'
+            )
+        },
+        error: function (error) {
+            addButton.disabled = false;
+            addButton.innerHTML = "Add &raquo;";
+
+            errorAlert.removeAttribute("hidden");
+        }
+    });
+}
+
 /**
  * Function to validate add paper inputs
  * @returns {boolean}
@@ -119,7 +141,7 @@ function addPaper(){
 function validateAddPaper() {
     const trainingPaper = document.getElementById("trainingpaper");
 
-    if(trainingPaper.files.length == 0){
+    if (trainingPaper.files.length === 0) {
         trainingPaper.setCustomValidity("Please add a sample paper for the writer!");
         trainingPaper.reportValidity();
         return false;

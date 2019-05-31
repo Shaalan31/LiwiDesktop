@@ -61,6 +61,23 @@ function loadPredictions() {
                 birthday1.innerHTML += (" " + predictions[i]._birthday);
                 break;
             case 2:
+                var BtnNameS = document.getElementById('BtnNameT');
+                var imageS = document.getElementById('imageT');
+                var NameS = document.getElementById('NameT');
+                var username = document.getElementById('username2');
+                var address = document.getElementById('address2');
+                var nid1 = document.getElementById('nid2');
+                var birthday1 = document.getElementById('birthday2');
+                var phone1 = document.getElementById('phone2');
+
+                BtnNameS.innerHTML += (" " + predictions[i]._name);
+                imageS.src = predictions[i]._image;
+                NameS.innerHTML += (" " + predictions[i]._name);
+                username.innerHTML += (" " + predictions[i]._username);
+                address.innerHTML += (" " + predictions[i]._address);
+                nid1.innerHTML += (" " + predictions[i]._nid);
+                phone1.innerHTML += (" " + predictions[i]._phone);
+                birthday1.innerHTML += (" " + predictions[i]._birthday);
                 break;
         }
     }

@@ -1,6 +1,15 @@
+// import io from 'socket.io-client';
+// const socketIOClient = require('socket.io-client')
+
 var localhost = "localhost:5000";
 
 function predictOnLoad() {
+    const socketIOClient = require('socket.io-client')
+    const ioClient = socketIOClient.connect("http://127.0.0.1:5000");
+    ioClient.on('LIWI', function (data) {
+        loadImageIntoPopUp(data.url, data.label);
+    });
+
     // get language
     var hrefParams = new URL(location.href);
     const lang = hrefParams.searchParams.get("lang");
@@ -15,6 +24,28 @@ function predictOnLoad() {
         + "Please remember to attach " + showLang + " Paper!";
 
     getAllWriters(lang);
+}
+
+function loadImageIntoPopUp(url, label) {
+    let SlideShow = document.getElementById('SlideShow');
+    var caption = '<p class="lead" style="text-align:center;">' + label + '</p>';
+
+    var img;
+    if (label === 'Block Sample')
+        img = '<img src="' + url + '" style="width:50%" class="offset-3">';
+    else if (label === 'WordWithKP')
+        img = '<img src="' + url + '" style="width:25%" class="offset-4">';
+    else
+        img = '<img src="' + url + '" style="width:100%">';
+
+    var slides = document.getElementsByClassName("mySlides");
+
+    if(slides == null || slides.length == 0)
+        var div = '<div class="mySlides">' + img + caption + '</div>';
+    else
+        var div = '<div class="mySlides" style="display: none">' + img + caption + '</div>';
+
+    SlideShow.innerHTML = SlideShow.innerHTML + div;
 }
 
 /**
@@ -81,13 +112,16 @@ function getPredictions(fileName) {
     const lang = hrefParams.searchParams.get("lang");
 
 
-    var ids = [];
-    for (var i = 0; i < chosenwriters.length; i++) {
-        ids.push(parseInt(chosenwriters[i].id));
-    }
+    // var ids = [];
+    // for (var i = 0; i < chosenwriters.length; i++) {
+    //     ids.push(parseInt(chosenwriters[i].id));
+    // }
 
     // var isArabic = document.getElementById("language").checked;
     // var lang = isArabic ? "ar" : "en";
+
+    document.getElementById("buttonImages").click();
+
     var data = {
         _filename: fileName
         // writers_ids: ids

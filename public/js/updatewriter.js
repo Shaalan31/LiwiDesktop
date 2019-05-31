@@ -1,17 +1,17 @@
 var localhost = "127.0.0.1:5000";
 
-$("#identifywriter").submit(function(e) {
+$("#identifywriter").submit(function (e) {
     e.preventDefault();
 });
 
 /**
  * load all writers in the system in the dropdown list
  */
-function loadUsers(){
+function loadUsers() {
     const noWritersAlert = document.getElementById("noWritersAlert");
     const generalErrorAlert = document.getElementById("generalErrorAlert");
 
-    url = 'http://'+localhost+'/allWriters'
+    url = 'http://' + localhost + '/allWriters'
     $.ajax({
         type: "GET",
         contentType: "application/json",
@@ -19,19 +19,19 @@ function loadUsers(){
         success: function (response) {
 
             var list = {};
-            for(let i = 0; i < response.data.length; i++){
-                
-                list[response.data[i]['_id']] = response.data[i]['_name']+' - '+response.data[i]['_username'];
-             }
-             $.each(list, function(key, value) {
+            for (let i = 0; i < response.data.length; i++) {
+
+                list[response.data[i]['_id']] = response.data[i]['_name'] + ' - ' + response.data[i]['_username'];
+            }
+            $.each(list, function (key, value) {
                 $('#writersList')
                     .append($("<option></option>")
-                    .attr("value",key)
-                    .text(value));
-           });
+                        .attr("value", key)
+                        .text(value));
+            });
         },
         error: function (error) {
-            if(error.status == 404)
+            if (error.status == 404)
                 noWritersAlert.removeAttribute("hidden");
             else
                 generalErrorAlert.removeAttribute("hidden");
@@ -43,14 +43,14 @@ function loadUsers(){
 /**
  * Function to send update writer with a new sample paper request
  */
-function updateWriter(){
+function updateWriter() {
     // validation and add loading button
     const updateButton = document.getElementById("updateButton");
     const errorAlert = document.getElementById("errorAlert");
     const notFoundAlert = document.getElementById("notFoundAlert");
 
 
-    if(!validateUpdateWriter())
+    if (!validateUpdateWriter())
         return;
     else {
         updateButton.disabled = true;
@@ -65,7 +65,7 @@ function updateWriter(){
 
     var e = document.getElementById("writersList");
     var writerId = e.options[e.selectedIndex].value
-    
+
     var formData = new FormData();
     formData.append('image', file);
 
@@ -78,15 +78,17 @@ function updateWriter(){
         data: formData,
         success: function (response) {
             var fileName = response.data;
-            
-            var url = "http://"+localhost+"/writer?lang="; 
 
-            if ($('#language').is(":checked")){
-                url = url+'ar'
+            var url = "http://" + localhost + "/writer?lang=";
+
+            var lang;
+            if ($('#language').is(":checked")) {
+                lang = 'ar'
+            } else {
+                lang = 'en'
             }
-            else{
-                url = url+'en'
-            }
+
+            url += lang;
             var userdata = {
                 _id: writerId,
                 _filename: fileName,
@@ -102,25 +104,16 @@ function updateWriter(){
                     errorAlert.setAttribute("hidden", "hidden");
                     notFoundAlert.setAttribute("hidden", "hidden");
 
-                    updateButton.disabled = false;
-                    updateButton.innerHTML = "Add &raquo;";
-
-                    const Swal = require('sweetalert2');
-                    Swal.fire(
-                        'Training Done',
-                        '',
-                        'success'
-                      )
+                    reFitClassifiers(lang);
                 },
                 error: function (error) {
                     updateButton.disabled = false;
-                    updateButton.innerHTML = "Add &raquo;";
+                    updateButton.innerHTML = "Add Paper &raquo;";
 
-                    if(error.status == 404){
+                    if (error.status === 404) {
                         errorAlert.setAttribute("hidden", "hidden");
                         notFoundAlert.removeAttribute("hidden");
-                    }
-                    else{
+                    } else {
                         notFoundAlert.setAttribute("hidden", "hidden");
                         errorAlert.removeAttribute("hidden");
                     }
@@ -149,7 +142,7 @@ function validateUpdateWriter() {
 
 
     // check dropdown menu
-    if(writersList.options[writersList.selectedIndex].value == 0){
+    if (writersList.options[writersList.selectedIndex].value === 0) {
         writersList.setCustomValidity("Please choose writer.");
         writersList.reportValidity();
         return false;
@@ -159,7 +152,7 @@ function validateUpdateWriter() {
         writersList.reportValidity();
     }
 
-    if(trainingPaper.files.length == 0){
+    if (trainingPaper.files.length === 0) {
         trainingPaper.setCustomValidity("Please add a sample paper for the writer!");
         trainingPaper.reportValidity();
         return false;
@@ -170,4 +163,37 @@ function validateUpdateWriter() {
     }
 
     return true;
+}
+
+function reFitClassifiers(language) {
+    const updateButton = document.getElementById("updateButton");
+    const errorAlert = document.getElementById("errorAlert");
+    const notFoundAlert = document.getElementById("notFoundAlert");
+
+    endPoint = "http://" + localhost + "/fitClassifiers?lang=";
+    endPoint = endPoint + language;
+    $.ajax({
+        type: "GET",
+        url: endPoint,
+        success: function (response) {
+            errorAlert.setAttribute("hidden", "hidden");
+            notFoundAlert.setAttribute("hidden", "hidden");
+
+            updateButton.disabled = false;
+            updateButton.innerHTML = "Add Paper &raquo;";
+
+            const Swal = require('sweetalert2');
+            Swal.fire(
+                'Adding Sample Paper Done',
+                '',
+                'success'
+            )
+        },
+        error: function (error) {
+            updateButton.disabled = false;
+            updateButton.innerHTML = "Add Paper &raquo;";
+
+            errorAlert.removeAttribute("hidden");
+        }
+    });
 }
