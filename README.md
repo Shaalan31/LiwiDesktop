@@ -10,33 +10,49 @@ This application enables users to identify the writer of a handwritten paper fro
 
 *LI Writer Identification*
 
+
+
 ![Homepage][home] 
 
 *Landing page*
+
+
 
 ![Add Writer][add_writer] 
 
 *Add writer*
 
+
+
 ![Add  Sample][add_sample] 
 
 *Add Sample*
+
+
 
 ![Sample done][sample_done] 
 
 *Sample added*
 
+
+
 ![Identify][identify] 
 
 *Select Language to identify between different writers*
+
+
 
 ![predict][predict] 
 
 *Select a paper to identify it's wirter's identity*
 
+
+
 ![prediction][prediction] 
 
 *Prediction Result*
+
+
 
 
 
