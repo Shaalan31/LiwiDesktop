@@ -6,8 +6,52 @@ This application enables users to identify the writer of a handwritten paper fro
 
 ## Screen shots
 ---
-![LOGO][logo]
+![LOGO][logo] 
+
 *LI Writer Identification*
+
+
+
+![Homepage][home] 
+
+*Landing page*
+
+
+
+![Add Writer][add_writer] 
+
+*Add writer*
+
+
+
+![Add  Sample][add_sample] 
+
+*Add Sample*
+
+
+
+![Sample done][sample_done] 
+
+*Sample added*
+
+
+
+![Identify][identify] 
+
+*Select Language to identify between different writers*
+
+
+
+![predict][predict] 
+
+*Select a paper to identify it's wirter's identity*
+
+
+
+![prediction][prediction] 
+
+*Prediction Result*
+
 
 
 
@@ -15,7 +59,7 @@ This application enables users to identify the writer of a handwritten paper fro
 
 ## Requirements
 
-For development, you will only need Node.js and a node global package installed in your environement, and MongoDB to store the features of the writers.
+For development, you will only need Node.js and a node global package installed in your environement, and MongoDB to store the features of the writers, and a the python server of [LIWI](https://github.com/Shaalan31/LIWI).
 
 ### Node
 - #### Node installation on Windows
@@ -46,6 +90,10 @@ If you need to update `npm`, you can make it using `npm`! Cool right? After runn
     $ npm install npm -g
 
 
+
+### LIWI
+
+Follow the steps in LIWI's repo
 
 ## Install
 
