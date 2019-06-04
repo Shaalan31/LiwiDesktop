@@ -2,11 +2,20 @@
 
 A desktop interface to enable users to test [LIWI](https://github.com/Shaalan31/LIWI)
 
+This application enables users to identify the writer of a handwritten paper from a pool of 300 writers.
+
 ## Screen shots
 ---
+![LOGO][logo]
+*LI Writer Identification*
+
+
+
+
+
 ## Requirements
 
-For development, you will only need Node.js and a node global package installed in your environement.
+For development, you will only need Node.js and a node global package installed in your environement, and MongoDB to store the features of the writers.
 
 ### Node
 - #### Node installation on Windows
@@ -47,3 +56,25 @@ If you need to update `npm`, you can make it using `npm`! Cool right? After runn
 	
 	$ npm install 
 	$ npm start
+
+
+
+
+
+[logo]: https://github.com/Shaalan31/LiwiDesktop/blob/master/readme_images/logo.png "LI Writer Indeitification"
+
+[add_sample]: https://github.com/Shaalan31/LiwiDesktop/blob/master/readme_images/add_sample.png "Add Sample"
+
+[add_writer]: https://github.com/Shaalan31/LiwiDesktop/blob/master/readme_images/add_writer.png "Add Writer"
+
+[home]: https://github.com/Shaalan31/LiwiDesktop/blob/master/readme_images/home.png "Home"
+
+[identify]: https://github.com/Shaalan31/LiwiDesktop/blob/master/readme_images/identify.png "Identify"
+
+[predict]: https://github.com/Shaalan31/LiwiDesktop/blob/master/readme_images/predict.png "predict"
+
+[prediction]: https://github.com/Shaalan31/LiwiDesktop/blob/master/readme_images/prediction.png "prediction"
+
+[sample_done]: https://github.com/Shaalan31/LiwiDesktop/blob/master/readme_images/sample_done.png "sample done"
+
+
